@@ -13,8 +13,10 @@ const server = new ApolloServer({
 });
 
 const startApolloServer = async () => {
-  await server.start();
   await db();
+  console.log('Connected to MongoDB Atlas')
+
+  await server.start();
 
   const PORT = process.env.PORT || 3001;
   const app = express();
