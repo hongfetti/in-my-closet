@@ -28,7 +28,7 @@ const Add = () => {
 
 
     <main className="d-flex flex-column justify-content-center align-items-center min-vh-100">
-  <h1 className="text-center">ADD ITEM</h1>
+  <h1 className="add-item-title">ADD ITEM</h1>
 
   <form className="form d-flex flex-column align-items-center w-100">
     {/* Article Type Dropdown */}
