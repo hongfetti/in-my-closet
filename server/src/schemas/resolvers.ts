@@ -72,6 +72,20 @@ interface DeleteOutfitArgs {
 
 const resolvers = {
   Query: {
+
+    currentUser: async (_parent: any, _args: any, context: any) => {
+      if (context.user) {
+        const user = await User.findOne({ _id: context.user._id })
+        // Populate both clothingItems and outfits
+          .populate("clothingItems")
+          .populate("outfits"); 
+          
+        // Return the entire user object (which will include populated clothingItems and outfits)
+        return user; 
+      }
+      throw new AuthenticationError('Could not authenticate user.');
+    },
+
     // The 'me' query relies on the context to check if the user is authenticated
     // Query to get current user and populate the clothing item and outfit data
     myClothingItems: async (_parent: any, _args: any, context: any) => {
@@ -116,6 +130,7 @@ const resolvers = {
       return outfit
     }
   },
+  
   Mutation: {
     addUser: async (_parent: any, { input }: AddUserArgs) => {
       // Check to see if user being created already exists

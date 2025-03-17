@@ -121,8 +121,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]
-    user(username: String!): User
+    currentUser: [User]
     myClothingItems: [ClothingItem]
     myOutfits: [Outfit]
     outfits: [Outfit]
