@@ -4,11 +4,12 @@ import Carousel from "../../components/carousel/Carousel";
 const Home = () => {
   return (
     <main>
-      <h1>Home</h1>
-      <Carousel />
-      <Carousel />
-      {/* add two carousel components for tops and bottoms */}
+      <section className="container">
+        <h1>Home</h1>
 
+        <Carousel id="carouselTop" />
+        <Carousel id="carouselBottom" />
+      </section>
       <Link className="page-nav" to="/add">
         <button className="btn-add">Add Items</button>
       </Link>
