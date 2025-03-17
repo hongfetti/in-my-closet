@@ -38,8 +38,6 @@
     "wait-on": "^7.2.0"
   },
   "dependencies": {
-    "@cloudinary/react": "^1.14.1",
-    "@cloudinary/url-gen": "^1.21.0",
     "bootstrap": "^5.3.3"
   }
 }
