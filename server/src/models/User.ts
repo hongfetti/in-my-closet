@@ -9,6 +9,7 @@ interface IUser extends Document {
   password: string;
   outfits: Schema.Types.ObjectId[];
   clothingItems: Schema.Types.ObjectId[];
+  location: string;
   isCorrectPassword(password: string): Promise<boolean>;
 }
 
@@ -43,7 +44,12 @@ const userSchema = new Schema<IUser>(
         type: Schema.Types.ObjectId,
         ref: 'ClothingItems'
       }
-    ]
+    ],
+    location: {
+      type: String,
+      required: true,
+      trim: true
+    }
   },
   {
     timestamps: true,

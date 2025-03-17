@@ -25,7 +25,7 @@ const outfitSchema = new Schema<IOutfit>(
             validate: {
                 validator: async function (value: Types.ObjectId) {
                     const item = await ClothingItem.findById(value);
-                    return item?.clothingType === 'top';
+                    return item?.articleType === 'top';
                 },
                 message: 'topId must refer to an item of the type "top"'
             }
@@ -37,7 +37,7 @@ const outfitSchema = new Schema<IOutfit>(
             validate: {
                 validator: async function (value: Types.ObjectId) {
                     const item = await ClothingItem.findById(value);
-                    return item?.clothingType === 'bottom';
+                    return item?.articleType === 'bottom';
                 },
                 message: 'bottomId must refer to an item of the type "bottom"'
             }
@@ -49,7 +49,7 @@ const outfitSchema = new Schema<IOutfit>(
             validate: {
                 validator: async function (value: Types.ObjectId) {
                     const item = await ClothingItem.findById(value);
-                    return item?.clothingType === 'outerwear';
+                    return item?.articleType === 'outerwear';
                 },
                 message: 'outerwearId must refer to an item of the type "outerwear"'
             }

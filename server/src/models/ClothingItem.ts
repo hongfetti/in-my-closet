@@ -3,7 +3,7 @@ import { Schema, model, Document, Types } from 'mongoose';
 interface IClothingItem extends Document {
     _id: Types.ObjectId;
     imageUrl: string;
-    clothingType: 'top' | 'bottom' | 'outerwear';
+    articleType: 'top' | 'bottom' | 'outerwear';
     color: string;
     size: string;
     season: string;
@@ -17,7 +17,7 @@ const clothingItemSchema = new Schema<IClothingItem>(
             required: true,
             trim: true,
         },
-        clothingType: {
+        articleType: {
             type: String,
             required: true,
             enum: ['top', 'bottom', 'outerwear']

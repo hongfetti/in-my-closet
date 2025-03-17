@@ -8,6 +8,7 @@ const typeDefs = gql`
     password: String!
     outfits: [Outfit]!
     clothingItem: [ClothingItem]!
+    location: String!
   }
 
   type ClothingItem {
@@ -45,6 +46,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    location: String!
   }
 
   input ClothingItemInput {
