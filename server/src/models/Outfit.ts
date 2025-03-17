@@ -1,5 +1,5 @@
 import { Schema, model, Document, Types } from 'mongoose';
-import ClothingItem from './ClothingItem';
+import ClothingItem from './ClothingItem.js';
 
 interface IOutfit extends Document {
     _id: Types.ObjectId;
