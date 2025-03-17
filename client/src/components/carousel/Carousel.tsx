@@ -46,16 +46,6 @@ const Carousel: React.FC<CarouselProps> = ({ id }) => {
           </div>
         </div>
 
-        {/* External Previous and Next Buttons */}
-        {/* <div className="d-flex justify-content-center mt-3">
-          <button
-            className="btn btn-primary me-2"
-            type="button"
-            data-bs-target={`#${id}`}
-            data-bs-slide="prev"
-          >
-            Previous
-          </button> */}
         <button
           className="btn btn-primary control-next"
           type="button"
@@ -64,7 +54,6 @@ const Carousel: React.FC<CarouselProps> = ({ id }) => {
         >
           →
         </button>
-        {/* </div> */}
       </div>
     </section>
   );
