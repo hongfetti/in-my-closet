@@ -7,7 +7,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     outfits: [Outfit]!
-    clothingItem: [ClothingItem]!
+    clothingItems: [ClothingItem]!
     location: String!
   }
 
@@ -66,7 +66,10 @@ const typeDefs = gql`
     user: User!
     top: ClothingItem!
     bottom: ClothingItem!
+    dressJumpsuit: ClothingItem
+    shoes: ClothingItem
     outerwear: ClothingItem
+    accessories: [ClothingItem]
   }
 
   input UserInput {
@@ -84,10 +87,32 @@ const typeDefs = gql`
     season: Season!
   }
 
+  input UpdateClothingItemInput {
+    id: ID!
+    image_url: String
+    articleType: ArticleType
+    color: Color
+    size: Size
+    season: Season
+  }
+
   input OutfitInput {
     topId: ID!
     bottomId: ID!
-    outerwearId: ID!
+    dressJumpsuitId: ID
+    shoesId: ID
+    outerwearId: ID
+    accessoriesIds: [ID!]
+  }
+
+  input UpdateOutfitInput {
+    id: ID!
+    topId: ID
+    bottomId: ID
+    dressJumpsuitId: ID
+    shoesId: ID
+    outerwearId: ID
+    accessoriesIds: [ID!]
   }
   
   type Auth {
@@ -108,8 +133,14 @@ const typeDefs = gql`
   type Mutation {
     addUser(input: UserInput!): Auth
     login(email: String!, password: String!): Auth
+
     addClothingItem(input: ClothingItemInput!): ClothingItem
+    updateClothingItem(input: UpdateClothingItemInput!): ClothingItem
+    deleteClothingItem(id: ID!): ClothingItem
+
     addOutfit(input: OutfitInput!): Outfit
+    updateOutfit(input: UpdateOutfitInput!): Outfit
+    deleteOutfit(id: ID!): Outfit
   }
 `;
 
