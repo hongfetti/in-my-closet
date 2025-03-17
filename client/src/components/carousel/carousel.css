@@ -1,0 +1,66 @@
+/* .closet-item {
+  max-width: 500px;
+  max-height: 500px;
+} */
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.carousel-item,
+.active,
+.carousel-inner,
+.carousel,
+.slide {
+  max-width: 800px;
+  max-height: 800px;
+  position: relative;
+}
+
+.carousel-inner {
+  width: 100%; /* Ensure the carousel container has a width of 100% */
+  height: 500px; /* Set a fixed height for consistency */
+}
+
+.carousel-item img {
+  width: 100%; /* Make sure the images are responsive */
+  height: 100%; /* Maintain aspect ratio */
+}
+
+.control-prev,
+.control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Optional: for a dark background on the buttons */
+  color: white;
+  border: none;
+  padding: 10px; /* Adjust the padding to control the size of the button */
+  width: 70px; /* Increased width for a larger button */
+  height: 70px; /* Increased height to maintain a circle shape */
+  border-radius: 50%; /* Make the button round */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the text or icon inside the circle */
+  font-size: 30px; /* Increase the font size to enlarge the arrow */
+  z-index: 1;
+}
+
+/* Position the Previous Button on the Left */
+.control-prev {
+  left: -200px;
+}
+
+/* Position the Next Button on the Right */
+.control-next {
+  right: -200px;
+}
