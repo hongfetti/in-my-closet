@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/2.png"; 
 
 const NavigationBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#ffbe98" }}>
       <div className="container">
-        {/* Navbar brand (logo or site title) */}
-        <Link className="navbar-brand" to="/">My Closet</Link>
+       
+        <Link className="navbar-brand" to="/">
+          <img src={logo} alt="Logo" width="120" height="50" />
+        </Link>
 
-        {/* Toggle button for mobile responsiveness */}
         <button 
           className="navbar-toggler" 
           type="button" 
@@ -20,17 +22,16 @@ const NavigationBar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Collapsible navigation links */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link text-dark" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/login">Login</Link>
+              <Link className="nav-link text-dark" to="/login">Login</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/signup">Sign Up</Link>
+              <Link className="nav-link text-dark" to="/signup">Sign Up</Link>
             </li>
           </ul>
         </div>
@@ -40,3 +41,7 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
+
+
+
+
