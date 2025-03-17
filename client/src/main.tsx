@@ -7,7 +7,9 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ErrorPage from "./pages/Error";
-import Add from "./pages/AddItem";
+import Add from "./pages/add/AddItem";
+import Saved from "./pages/SavedOutfits";
+import Wardrobe from "./pages/Wardrobe";
 
 const router = createBrowserRouter([
   {
@@ -31,13 +33,14 @@ const router = createBrowserRouter([
         path: "/add",
         element: <Add />,
       },
-      // {
-      //   path: '/saved',
-      //   element: <Saved />
-      // },{
-      //   path: '/wardrobe,
-      //   element: <Wardrobe />
-      // }
+      {
+        path: "/saved",
+        element: <Saved />,
+      },
+      {
+        path: "/wardrobe",
+        element: <Wardrobe />,
+      },
     ],
   },
 ]);
