@@ -7,6 +7,7 @@ interface AddUserArgs {
     username: string;
     email: string;
     password: string;
+    location: string;
   }
 }
 
@@ -22,19 +23,21 @@ interface UserArgs {
 
 const resolvers = {
   Query: {
-    users: async () => {
-      return User.find().populate('thoughts');
-    },
-    user: async (_parent: any, { username }: UserArgs) => {
-      return User.findOne({ username }).populate('thoughts');
-    },
+    // is this for finding all users? maybe leave this off for now until we decide to do social media?
+    // users: async () => {
+    //   return User.find().populate('thoughts');
+    // },
+    // this seems unneccessary also if we are not using social media like applications like seeing specific users other than the current one. Can be replaced just with the below "me" query
+    // user: async (_parent: any, { username }: UserArgs) => {
+    //   return User.findOne({ username }).populate("clothingItems").populate("outfits");
+    // },
 
     // Query to get the authenticated user's information
     // The 'me' query relies on the context to check if the user is authenticated
     me: async (_parent: any, _args: any, context: any) => {
       // If the user is authenticated, find and return the user's information along with their thoughts
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
+        return User.findOne({ _id: context.user._id }).populate("clothingItems").populate("outfits");
       }
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError('Could not authenticate user.');

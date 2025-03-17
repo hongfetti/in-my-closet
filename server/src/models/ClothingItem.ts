@@ -2,7 +2,7 @@ import { Schema, model, Document, Types } from "mongoose";
 
 interface IClothingItem extends Document {
     _id: Types.ObjectId;
-    imageUrl: string;
+    image_Url: string;
     articleType: "Top" | "Bottom" | "Dress_Jumpsuit" | "Shoes" | "Outerwear" | "Accessories";
     color: "Red" | "Green" | "Blue" | "Yellow" | "Orange" | "Pink" | "Black" | "White" | "Grey" | "Multi_Color";
     size: "OS" | "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
@@ -12,7 +12,7 @@ interface IClothingItem extends Document {
 
 const clothingItemSchema = new Schema<IClothingItem>(
     {
-        imageUrl: {
+        image_Url: {
             type: String,
             required: true,
             trim: true,

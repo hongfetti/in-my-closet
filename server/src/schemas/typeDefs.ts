@@ -13,7 +13,7 @@ const typeDefs = gql`
 
   type ClothingItem {
     _id: ID!
-    imageUrl: String!
+    image_Url: String!
     articleType: ArticleType!
     color: Color!
     size: Size!
