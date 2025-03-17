@@ -22,4 +22,5 @@ jobs:
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
-          curl "https://in-my-closet-89qk.onrender.com"
+          curl "https://in-my-closet-89qk.onrender.com"  
+          # deployed link goes here ^
