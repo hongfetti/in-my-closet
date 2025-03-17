@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./add.css";
 import UploadWidget from "../../components/Widget";
+import { useMutation } from "@apollo/client";
 
 type DropdownKey = "articleType" | "size" | "color" | "season";
 
