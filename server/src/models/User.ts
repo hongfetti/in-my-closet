@@ -1,5 +1,5 @@
-import { Schema, model, Document, Types } from 'mongoose';
-import bcrypt from 'bcrypt';
+import { Schema, model, Document, Types } from "mongoose";
+import bcrypt from "bcrypt";
 
 // Define an interface for the User document
 interface IUser extends Document {
@@ -26,7 +26,7 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/, 'Must match an email address!'],
+      match: [/.+@.+\..+/, "Must match an email address!"],
     },
     password: {
       type: String,
@@ -36,13 +36,13 @@ const userSchema = new Schema<IUser>(
     outfits: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Outfit'
+        ref: "Outfit"
       }
     ],
     clothingItems: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'ClothingItems'
+        ref: "ClothingItems"
       }
     ],
     location: {
@@ -58,8 +58,8 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-userSchema.pre<IUser>('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
+userSchema.pre<IUser>("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -71,6 +71,6 @@ userSchema.methods.isCorrectPassword = async function (password: string): Promis
   return bcrypt.compare(password, this.password);
 };
 
-const User = model<IUser>('User', userSchema);
+const User = model<IUser>("User", userSchema);
 
 export default User;

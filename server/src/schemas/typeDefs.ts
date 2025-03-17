@@ -14,17 +14,44 @@ const typeDefs = gql`
   type ClothingItem {
     _id: ID!
     imageUrl: String!
-    clothingType: ClothingType!
-    color: String!
-    size: String!
+    articleType: ArticleType!
+    color: Color!
+    size: Size!
     season: Season!
     createdAt: String!
   }
 
-  enum ClothingType {
+  enum ArticleType {
     TOP
     BOTTOM
+    DRESS_JUMPSUIT
+    SHOES
     OUTERWEAR
+    ACCESSORIES
+  }
+
+  enum Color {
+    RED
+    GREEN
+    BLUE
+    YELLOW
+    ORANGE
+    PINK
+    BLACK
+    WHITE
+    GREY
+    MULTI_COLOR
+  }
+
+  enum Size {
+    OS
+    XS
+    S
+    M
+    L
+    XL
+    XXL
+    XXXL
   }
 
   enum Season {
@@ -51,9 +78,9 @@ const typeDefs = gql`
 
   input ClothingItemInput {
     imageUrl: String!
-    clothingType: ClothingType!
-    color: String!
-    size: String!
+    articleType: ArticleType!
+    color: Color!
+    size: Size!
     season: Season!
   }
 
