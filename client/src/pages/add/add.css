@@ -84,3 +84,8 @@ body {
   background-position: center; /* Center image */
   background-attachment: fixed; /* Stays fixed while scrolling */
 }
+
+.upload {
+  margin-bottom: 50px;
+  margin-right: 50px;
+}
