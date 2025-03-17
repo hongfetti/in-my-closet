@@ -16,8 +16,20 @@ interface LoginUserArgs {
   password: string;
 }
 
+// is being used to get other users - not used currently
 interface UserArgs {
   username: string;
+}
+
+interface AddClothingArgs {
+  input: {
+    image_url: string;
+    articleType: string;
+    color: string;
+    size: string;
+    season: string;
+    createdAt: Date;
+  }
 }
 
 
@@ -63,6 +75,23 @@ const resolvers = {
     
       // Return the token and the user
       return { token, user };
+    },
+
+    addClothingItem: async (_parent: any, { input }: AddClothingArgs, context: any) => {
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to add a new clothing item")
+      }
+
+      const clothingItem = await ClothingItem.create({...input });
+
+      await User.findByIdAndUpdate(
+        context.user._id,
+        { $push: { clothingItems: clothingItem._id } },
+        { new: true }
+      );
+
+      return clothingItem
+
     },
     
     login: async (_parent: any, { email, password }: LoginUserArgs) => {
