@@ -1,20 +1,24 @@
 import { useState } from "react";
 import "./add.css";
 
+type DropdownKey = "articleType" | "size" | "color" | "season";
+
 const Add = () => {
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const [selectedItems, setSelectedItems] = useState({
+  const [openDropdown, setOpenDropdown] = useState<DropdownKey | null>(null);
+  const [selectedItems, setSelectedItems] = useState<
+    Record<DropdownKey, string>
+  >({
     articleType: "Article type",
     size: "Size",
     color: "Color",
     season: "Season",
   });
 
-  const toggleDropdown = (dropdownName) => {
+  const toggleDropdown = (dropdownName: DropdownKey) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
 
-  const handleSelect = (dropdownName, item) => {
+  const handleSelect = (dropdownName: DropdownKey, item: string) => {
     setSelectedItems((prev) => ({ ...prev, [dropdownName]: item }));
     setOpenDropdown(null); // Close dropdown after selection
   };
