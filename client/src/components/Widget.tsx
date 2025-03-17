@@ -44,4 +44,4 @@ const UploadWidget = ({ setImageUrl }: { setImageUrl: (url: string) => void }) =
   );
 };
 
-export default UploadWidget;
+export default UploadWidget;         
