@@ -17,9 +17,9 @@ interface LoginUserArgs {
 }
 
 // is being used to get other users - not used currently
-interface UserArgs {
-  username: string;
-}
+// interface UserArgs {
+//   username: string;
+// }
 
 interface AddClothingArgs {
   input: {
@@ -32,6 +32,29 @@ interface AddClothingArgs {
   }
 }
 
+interface UpdateClothingArgs {
+  input: {
+    id: string;
+    image_url?: string;
+    articleType?: string;
+    color?: string;
+    size?: string;
+    season: string;
+    createdAt: Date;
+  }
+}
+
+interface AddOutfitArgs {
+  input: {
+    userId: string;
+    topId: string;
+    bottomId: string;
+    dressJumpsuitId?: string;
+    shoesId?: string;
+    outerwearId?: string;
+    accessoriesIds?: string[];
+  }
+}
 
 const resolvers = {
   Query: {
@@ -77,23 +100,6 @@ const resolvers = {
       return { token, user };
     },
 
-    addClothingItem: async (_parent: any, { input }: AddClothingArgs, context: any) => {
-      if (!context.user) {
-        throw new AuthenticationError("You must be logged in to add a new clothing item")
-      }
-
-      const clothingItem = await ClothingItem.create({...input });
-
-      await User.findByIdAndUpdate(
-        context.user._id,
-        { $push: { clothingItems: clothingItem._id } },
-        { new: true }
-      );
-
-      return clothingItem
-
-    },
-    
     login: async (_parent: any, { email, password }: LoginUserArgs) => {
       // Find a user with the provided email
       const user = await User.findOne({ email });
@@ -116,6 +122,91 @@ const resolvers = {
     
       // Return the token and the user
       return { token, user };
+    },
+
+    addClothingItem: async (_parent: any, { input }: AddClothingArgs, context: any) => {
+      // make sure user is valid
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to add a new clothing item")
+      }
+
+      // create clothing item
+      const clothingItem = await ClothingItem.create({...input });
+
+      // push the clothing item onto the clothingItems array on User
+      await User.findByIdAndUpdate(
+        context.user._id,
+        { $push: { clothingItems: clothingItem._id } },
+        { new: true }
+      );
+
+      return clothingItem
+
+    },
+
+    updateClothingItem: async (_parent: any, { input }: UpdateClothingArgs, context: any) => {
+      // make sure user is valid
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to add a new clothing item")
+      }
+
+      // Find the clothing item
+      const clothingItem = await ClothingItem.findById(input.id);
+      if (!clothingItem) {
+        throw new Error("Clothing item not found");
+      }
+
+      const updatedClothingItem = await ClothingItem.findByIdAndUpdate(
+        input.id,
+        { $set: input },
+        { new: true, runValidators: true }
+      );
+
+      return updatedClothingItem
+    },
+
+    deleteClothingItem: async (_parent: any, { input }: UpdateClothingArgs, context: any) => {
+      // make sure user is valid
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to add a new clothing item")
+      }
+
+      // Find the clothing item
+      const clothingItem = await ClothingItem.findById(input.id);
+      if (!clothingItem) {
+        throw new Error("Clothing item not found");
+      }
+
+      // remove the clothing item from the clothingItems array in users
+      await User.findByIdAndUpdate(
+        context.user._id,
+        { $pull: { clothingItems: input.id } },
+        { new: true }
+      );
+
+      // delete clothing item from database
+      await ClothingItem.findByIdAndDelete(input.id);
+      
+      return { message: "Clothing item successfully deleted!" }
+    },
+    
+    addOutfit: async (_parent: any, { input }: AddOutfitArgs, context: any) => {
+      // make sure user is valid
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to add a new clothing item")
+      }
+
+      // create clothing item
+      const outfit = await Outfit.create({...input });
+
+      // push the clothing item onto the clothingItems array on User
+      await User.findByIdAndUpdate(
+        context.user._id,
+        { $push: { outfits: outfit._id } },
+        { new: true }
+      );
+
+      return outfit
     }
   },
 };
