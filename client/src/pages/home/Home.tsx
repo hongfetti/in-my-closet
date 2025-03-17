@@ -10,7 +10,7 @@ const Home = () => {
       {/* add two carousel components for tops and bottoms */}
 
       <Link className="page-nav" to="/add">
-        Add Items
+        <button className="btn-add">Add Items</button>
       </Link>
     </main>
   );
