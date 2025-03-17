@@ -1,4 +1,4 @@
-import { User } from '../models/index.js';
+import { User, ClothingItem, Outfit } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js'; 
 
 // Define types for the arguments
@@ -7,6 +7,7 @@ interface AddUserArgs {
     username: string;
     email: string;
     password: string;
+    location: string;
   }
 }
 
@@ -22,26 +23,38 @@ interface UserArgs {
 
 const resolvers = {
   Query: {
-    users: async () => {
-      return User.find().populate('thoughts');
-    },
-    user: async (_parent: any, { username }: UserArgs) => {
-      return User.findOne({ username }).populate('thoughts');
-    },
-
-    // Query to get the authenticated user's information
     // The 'me' query relies on the context to check if the user is authenticated
+    // Query to get current user and populate the clothing item and outfit data
     me: async (_parent: any, _args: any, context: any) => {
       // If the user is authenticated, find and return the user's information along with their thoughts
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
+        return User.findOne({ _id: context.user._id }).populate("clothingItems").populate("outfits");
       }
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError('Could not authenticate user.');
     },
+
+    // Query to get a specific clothing item for update/delete
+    clothingItem: async (_parent: any, { id }: { id: string }) => {
+      return ClothingItem.findById(id);
+    },
+
+    // Query to get a specific outfit for update/delete
+    outfit: async (_parent: any, { id }: { id: string }) => {
+      return Outfit.findById(id)
+    }
   },
   Mutation: {
     addUser: async (_parent: any, { input }: AddUserArgs) => {
+      // Check to see if user being created already exists
+      const existingUser = await User.findOne({
+        $or: [{ username: input.username }, { email: input.email }],
+      });
+
+      if (existingUser) {
+        throw new AuthenticationError("Username or email already exists")
+      };
+
       // Create a new user with the provided username, email, and password
       const user = await User.create({ ...input });
     

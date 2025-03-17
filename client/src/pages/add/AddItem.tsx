@@ -176,6 +176,12 @@ const Add = () => {
               </li>
               <li
                 className="dropdown-item"
+                onClick={() => handleSelect("color", "Blue")}
+              >
+                Blue
+              </li>
+              <li
+                className="dropdown-item"
                 onClick={() => handleSelect("color", "Yellow")}
               >
                 Yellow
