@@ -7,3 +7,67 @@
 .btn-group {
   margin-bottom: 50px;
 }
+
+.center-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertical Center */
+  align-items: center; /* Horizontal Center */
+  min-height: 100vh; /* Full Viewport Height */
+  text-align: center;
+}
+
+.uniform-button {
+  width: 250px;  
+  height: 50px;  
+  font-size: 16px; 
+  text-align: center;
+}
+
+/* DEFAULT STYLING */
+.dropdown-toggle {
+  color: #7669ea !important; 
+  background-color: white !important;
+  border: 2px solid #7669ea !important; 
+}
+
+/* DROPDOWN STYLING*/
+.dropdown-toggle:focus,
+.dropdown-toggle:active {
+  background-color: white !important;
+  color: #7669ea !important;
+  box-shadow: none !important;
+}
+
+/* DROPDOWN MENU ITEMS */
+.dropdown-item {
+  color: #7669ea !important; 
+  background-color: white !important;
+}
+
+/* DROPDOWN HOVER */
+.dropdown-item:hover {
+  background-color: #e6e4fa !important;
+  color: #5a50c1 !important;
+}
+
+.add-button {
+  background-color: #7669ea !important; 
+  color: white !important; 
+  border: none !important;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.add-button:hover {
+  background-color: #5a50c1 !important; 
+}
+
+/* Active Effect */
+.add-button:active {
+  background-color: #4a42a5 !important; 
+}
