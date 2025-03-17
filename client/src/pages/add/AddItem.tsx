@@ -1,17 +1,20 @@
 import { useState } from "react";
 import "./add.css";
+import UploadWidget from "../../components/Widget";
 
 type DropdownKey = "articleType" | "size" | "color" | "season";
 
 const Add = () => {
   const [openDropdown, setOpenDropdown] = useState<DropdownKey | null>(null);
   const [selectedItems, setSelectedItems] = useState<
-    Record<DropdownKey, string>
+    Record<DropdownKey, string> & {image_url: string}//!! tacked this on here
   >({
     articleType: "Article type",
     size: "Size",
     color: "Color",
     season: "Season",
+    //!!Adding image url here as empty string
+    image_url: ""
   });
 
   const toggleDropdown = (dropdownName: DropdownKey) => {
@@ -21,6 +24,10 @@ const Add = () => {
   const handleSelect = (dropdownName: DropdownKey, item: string) => {
     setSelectedItems((prev) => ({ ...prev, [dropdownName]: item }));
     setOpenDropdown(null); // Close dropdown after selection
+  };
+//!!Chad's Change below
+  const handleImageUpload = (url: string) => {
+    setSelectedItems((prev) =>({...prev, image_url: url}));
   };
 
   return (
@@ -258,6 +265,14 @@ const Add = () => {
             </ul>
           )}
         </div>
+
+          <div>
+          
+          <UploadWidget setImageUrl={handleImageUpload} />
+          {selectedItems.image_url && (
+            <img src={selectedItems.image_url} alt="Profile Preview" width="400" />
+          )}
+          </div>
 
         <button type="button" className="btn btn-primary">
           Add to closet
