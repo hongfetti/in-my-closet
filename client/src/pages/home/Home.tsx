@@ -4,15 +4,23 @@ import { useQuery } from "@apollo/client";
 import { GET_CURRENT_USER } from "../../utils/queries";
 
 const Home = () => {
-  const { data } = useQuery(GET_CURRENT_USER);
+  const {
+    data,
+    // loading, error
+  } = useQuery(GET_CURRENT_USER);
   console.log(data);
 
-  const userTopImageURLS = data.me.clothingItems.filter(
-    (clothingItem: any) => clothingItem === "Top"
-  );
-  const userBottomImageURLS = data.me.clothingItems.filter(
-    (clothingItem: any) => clothingItem === "Bottom"
-  );
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error loading data.</p>;
+
+  const userTopImageURLS =
+    data?.currentUser.clothingItems.filter(
+      (clothingItem: any) => clothingItem.articleType === "Top"
+    ) ?? [];
+  const userBottomImageURLS =
+    data?.currentUser.clothingItems.filter(
+      (clothingItem: any) => clothingItem.articleType === "Bottom"
+    ) ?? [];
 
   return (
     <main>
