@@ -31,10 +31,9 @@ const Add = () => {
     setSelectedItems((prev) => ({ ...prev, image_url: url }));
   };
 
+ 
+
   return (
-    
-
-
     <main className="d-flex flex-column justify-content-center align-items-center min-vh-100">
   <h1 className="add-item-title">ADD ITEM</h1>
 
@@ -126,17 +125,20 @@ const Add = () => {
       )}
     </div>
 
-
-        <div className="upload">
-          <UploadWidget setImageUrl={handleImageUpload} />
-          {selectedItems.image_url && (
-            <img
-              src={selectedItems.image_url}
-              alt="Profile Preview"
-              width="400"
-            />
-          )}
-        </div>
+    <div className="upload mt-4 w-50 text-center">
+  {/* <button type="button" className="btn add-button w-100">
+      Upload Image
+    </button> */}
+    <UploadWidget setImageUrl={handleImageUpload} />
+    {selectedItems.image_url && (
+      <img
+        src={selectedItems.image_url}
+        alt="Profile Preview"
+        width="400"
+        className="mt-3"
+      />
+    )}
+  </div>
 
         <button type="button" className="btn add-button mt-4 w-50 text-center">
       Add to Closet

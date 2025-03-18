@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/2.png"; 
+import logo from "../assets/in-my-closet-header-pic.png"; 
 
 const NavigationBar = () => {
   return (
@@ -7,7 +7,7 @@ const NavigationBar = () => {
       <div className="container">
        
         <Link className="navbar-brand" to="/">
-          <img src={logo} alt="Logo" width="120" height="50" />
+          <img src={logo} alt="Logo" width="380" height="120" />
         </Link>
 
         <button 
@@ -22,8 +22,8 @@ const NavigationBar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
+        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link text-dark" to="/">Home</Link>
             </li>
