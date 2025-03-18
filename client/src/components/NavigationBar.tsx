@@ -1,19 +1,52 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import currentWeatherData from "../utils/getWeather";
 import logo from "../assets/2.png"; 
 
 const NavigationBar = () => {
+  const [weather, setWeather] = useState<WeatherResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const location = 'Orlando';
+        const data = await currentWeatherData(location);
+        console.log(data);
+        setWeather(data);
+        
+      } catch (err) {
+        setError('Failed to fetch weather data');
+        console.error(err);
+      }
+    };
+
+    fetchWeather();
+  }, []);
+
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#ffbe98" }}>
       <div className="container">
-       
+        {/* Navbar brand (logo or site title) */}
         <Link className="navbar-brand" to="/">
-          <img src={logo} alt="Logo" width="120" height="50" />
+          My Closet
         </Link>
 
-        <button 
-          className="navbar-toggler" 
-          type="button" 
-          data-bs-toggle="collapse" 
+        {weather && (
+          <div className="weather-info">
+            <img src={weather.condition_icon} alt={weather.condition_text} />
+            <span>{weather.current_temp_f}, {weather.location_name}, {weather.location_region}</span>
+          </div>
+        )}
+
+        {error && <div className="weather-error">{error}</div>}
+
+        {/* Toggle button for mobile responsiveness */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
