@@ -8,7 +8,10 @@ const Home = () => {
     data,
     // loading, error
   } = useQuery(GET_CURRENT_USER);
-  console.log(data);
+  console.log("User:", GET_CURRENT_USER);
+  console.log("Fetched Data:", data);
+  // console.log("Loading:", loading);
+  // console.log("Error:", error);
 
   // if (loading) return <p>Loading...</p>;
   // if (error) return <p>Error loading data.</p>;
