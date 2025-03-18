@@ -184,6 +184,7 @@ const resolvers = {
       { input }: AddClothingArgs,
       context: any
     ) => {
+      console.log(input);
       // make sure user is valid
       if (!context.user) {
         throw new AuthenticationError(
@@ -192,8 +193,14 @@ const resolvers = {
       }
 
       // create clothing item
-      const clothingItem = await ClothingItem.create({ ...input });
-
+      const clothingItem = await ClothingItem.create({
+        articleType: input.articleType,
+        color: input.color,
+        size: input.size,
+        season: input.season,
+        image_url: input.image_url,
+      });
+      console.log(clothingItem);
       // push the clothing item onto the clothingItems array on User
       await User.findByIdAndUpdate(
         context.user._id,

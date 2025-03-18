@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 const typeDefs = gql`
   type User {
@@ -114,14 +114,14 @@ const typeDefs = gql`
     outerwearId: ID
     accessoriesIds: [ID!]
   }
-  
+
   type Auth {
     token: ID!
     user: User
   }
 
   type Query {
-    currentUser: [User]
+    currentUser: User # This may need to just return one user and not a user array
     myClothingItems: [ClothingItem]
     myOutfits: [Outfit]
     outfits: [Outfit]
