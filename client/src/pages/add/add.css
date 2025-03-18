@@ -67,20 +67,18 @@ A.form {
   transition: background-color 0.3s ease-in-out;
 }
 
-/* Hover Effect */
 .add-button:hover {
   background-color: #5a50c1 !important; 
 }
 
-/* Active Effect */
 .add-button:active {
   background-color: #4a42a5 !important; 
 }
 
 body {
   background-image: url('https://previews.dropbox.com/p/thumb/ACkonB954WZr-G9eNvpFsrNHK2OONAkabU0gqg8h_7El_6SK7VOAs7ycDAGG2uEgNGPPkNXkJxCIcNUZ-fDzpcacYF74ZDCEEeuXJ-btjgHQgYUkqUkR2nG2Op6wU0Qjl_VhLWaliiU4SUnSfcdWTqYp-aTkC_-8a1Wvi7FAjcHc8OcPR6K-G27iV-fDAuK4HjXFF8_4zTL8nsPEHH79CAYuzTCAumxt05RjD4Tvq8zrnXT6gMzAu2OJ9X6f7niLD17gH8bQIhEW-BqrkTe4z36guqD8-X54dJFej2XbMnqJv-QmuAyH4WHmQExJKcsw_lxVaFZD9BRQ-lvU5ILOFJbo/p.png'); /* Path to your image */
-  background-size: cover; /* Cover full page */
-  background-repeat: no-repeat; /* No repeating */
-  background-position: center; /* Center image */
-  background-attachment: fixed; /* Stays fixed while scrolling */
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-attachment: fixed; 
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import currentWeatherData from "../utils/getWeather";
-import logo from "../assets/2.png"; 
+import logo from "../assets/in-my-closet-header-pic.png";
 
 const NavigationBar = () => {
   const [weather, setWeather] = useState<WeatherResult | null>(null);
@@ -28,9 +28,14 @@ const NavigationBar = () => {
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#ffbe98" }}>
       <div className="container">
-        {/* Navbar brand (logo or site title) */}
-        <Link className="navbar-brand" to="/">
-          My Closet
+      <Link className="navbar-brand" to="/">
+          <img
+            src={logo}
+            alt="In My Closet Logo"
+            width="250"
+            height="85"
+            className="d-inline-block align-top"
+          />
         </Link>
 
         {weather && (
@@ -57,14 +62,14 @@ const NavigationBar = () => {
 
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
+            {/* <li className="nav-item">
+              <Link className="nav-link fw-bold" to="/" style={{ color: "#7669ea" }}>Home</Link>
+            </li> */}
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/">Home</Link>
+              <Link className="nav-link fw-bold" to="/login" style={{ color: "#7669ea" }}>Login</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/login">Login</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-dark" to="/signup">Sign Up</Link>
+              <Link className="nav-link fw-bold" to="/signup" style={{ color: "#7669ea" }}>Sign Up</Link>
             </li>
           </ul>
         </div>
