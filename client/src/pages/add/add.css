@@ -1,14 +1,86 @@
-.form {
+A.form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .btn-group {
-  margin-bottom: 50px;
+  margin-bottom: 10;
 }
 
-.upload {
-  margin-bottom: 50px;
-  margin-right: 50px;
+.center-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
+  text-align: center;
+}
+
+.add-item-title {
+  color: #7669ea !important; 
+  font-weight: bold;
+}
+
+.uniform-button {
+  width: 250px;  
+  height: 50px;  
+  font-size: 16px; 
+  text-align: center;
+}
+
+/* DEFAULT STYLING */
+.dropdown-toggle {
+  color: #7669ea !important; 
+  background-color: white !important;
+  border: 2px solid #7669ea !important; 
+}
+
+/* DROPDOWN STYLING*/
+.dropdown-toggle:focus,
+.dropdown-toggle:active {
+  background-color: white !important;
+  color: #7669ea !important;
+  box-shadow: none !important;
+}
+
+/* DROPDOWN MENU ITEMS */
+.dropdown-item {
+  color: #7669ea !important; 
+  background-color: white !important;
+}
+
+/* DROPDOWN HOVER */
+.dropdown-item:hover {
+  background-color: #e6e4fa !important;
+  color: #5a50c1 !important;
+}
+
+.add-button {
+  background-color: #7669ea !important; 
+  color: white !important; 
+  border: none !important;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.add-button:hover {
+  background-color: #5a50c1 !important; 
+}
+
+/* Active Effect */
+.add-button:active {
+  background-color: #4a42a5 !important; 
+}
+
+body {
+  background-image: url('https://previews.dropbox.com/p/thumb/ACkonB954WZr-G9eNvpFsrNHK2OONAkabU0gqg8h_7El_6SK7VOAs7ycDAGG2uEgNGPPkNXkJxCIcNUZ-fDzpcacYF74ZDCEEeuXJ-btjgHQgYUkqUkR2nG2Op6wU0Qjl_VhLWaliiU4SUnSfcdWTqYp-aTkC_-8a1Wvi7FAjcHc8OcPR6K-G27iV-fDAuK4HjXFF8_4zTL8nsPEHH79CAYuzTCAumxt05RjD4Tvq8zrnXT6gMzAu2OJ9X6f7niLD17gH8bQIhEW-BqrkTe4z36guqD8-X54dJFej2XbMnqJv-QmuAyH4WHmQExJKcsw_lxVaFZD9BRQ-lvU5ILOFJbo/p.png'); /* Path to your image */
+  background-size: cover; /* Cover full page */
+  background-repeat: no-repeat; /* No repeating */
+  background-position: center; /* Center image */
+  background-attachment: fixed; /* Stays fixed while scrolling */
 }
