@@ -22,7 +22,7 @@ const typeDefs = gql`
   }
 
   enum ArticleType {
-    TOP
+    TOP 
     BOTTOM
     DRESS_JUMPSUIT
     SHOES
