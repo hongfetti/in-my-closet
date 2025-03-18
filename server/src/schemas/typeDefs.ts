@@ -6,8 +6,8 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    outfits: [Outfit]!
-    clothingItems: [ClothingItem]!
+    outfits: [Outfit]
+    clothingItems: [ClothingItem]
     location: String!
   }
 
