@@ -48,7 +48,7 @@ const outfitSchema = new Schema<IOutfit>(
         dressJumpsuitId: {
             type: Schema.Types.ObjectId,
             ref: "ClothingItems",
-            required: true,
+            required: false,
             validate: {
                 validator: async function (value: Types.ObjectId) {
                     const item = await ClothingItem.findById(value);
@@ -60,7 +60,7 @@ const outfitSchema = new Schema<IOutfit>(
         shoesId: {
             type: Schema.Types.ObjectId,
             ref: "ClothingItems",
-            required: true,
+            required: false,
             validate: {
                 validator: async function (value: Types.ObjectId) {
                     const item = await ClothingItem.findById(value);
@@ -84,7 +84,7 @@ const outfitSchema = new Schema<IOutfit>(
         accessoriesId: {
             type: Schema.Types.ObjectId,
             ref: "ClothingItems",
-            required: true,
+            required: false,
             validate: {
                 validator: async function (value: Types.ObjectId) {
                     const item = await ClothingItem.findById(value);
