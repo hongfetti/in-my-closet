@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./add.css";
 import UploadWidget from "../../components/Widget";
 import { useMutation } from "@apollo/client";
-
+import { ADD_CLOTHING_ITEM } from "../../utils/mutations";
 type DropdownKey = "articleType" | "size" | "color" | "season";
 
 const Add = () => {
@@ -18,6 +18,9 @@ const Add = () => {
     image_url: "",
   });
 
+  const [addClothingItem,  {loading, error} ] = useMutation(ADD_CLOTHING_ITEM); //!!Added use mutation stuff here
+
+
   const toggleDropdown = (dropdownName: DropdownKey) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
@@ -31,7 +34,19 @@ const Add = () => {
     setSelectedItems((prev) => ({ ...prev, image_url: url }));
   };
 
- 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const { data } = await addClothingItem({
+        variables: {
+          input: selectedItems, 
+        },
+      });
+      console.log("Mutation Success:", data);
+    } catch (error) {
+      console.error("Mutation Error:", error);
+    }
+  };
 
   return (
     <main className="d-flex flex-column justify-content-center align-items-center min-vh-100">
@@ -140,11 +155,11 @@ const Add = () => {
     )}
   </div>
 
-        <button type="button" className="btn add-button mt-4 w-50 text-center">
-      Add to Closet
-    </button>
-  </form>
-</main>
+        <button type="button" className="btn btn-primary"onClick={handleSubmit} disabled={loading || !!error}> {/*on click stuff here*/}
+        {loading ? "Adding..." : "Add to closet"}
+        </button>
+      </form>
+    </main>
   );
 };
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import currentWeatherData from "../utils/getWeather";
-import logo from "../assets/2.png"; 
+import logo from "../assets/in-my-closet-header-pic.png
 
 const NavigationBar = () => {
   const [weather, setWeather] = useState<WeatherResult | null>(null);
