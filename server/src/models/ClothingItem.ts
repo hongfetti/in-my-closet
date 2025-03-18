@@ -3,10 +3,10 @@ import { Schema, model, Document, Types } from "mongoose";
 interface IClothingItem extends Document {
     _id: Types.ObjectId;
     image_url: string;
-    articleType: "Top" | "Bottom" | "Dress_Jumpsuit" | "Shoes" | "Outerwear" | "Accessories";
-    color: "Red" | "Green" | "Blue" | "Yellow" | "Orange" | "Pink" | "Black" | "White" | "Grey" | "Multi_Color";
+    articleType: "TOP" | "BOTTOM" | "DRESS_JUMPSUIT" | "SHOES" | "OUTERWEAR" | "ACCESSORIES";
+    color: "RED" | "GREEN" | "BLUE" | "YELLOW" | "ORANGE" | "PINK" | "BLACK" | "WHITE" | "GREY" | "MULTI_COLOR";
     size: "OS" | "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
-    season: "Spring" | "Summer" | "Fall" | "Winter";
+    season: "SPRING" | "SUMMER" | "FALL" | "WINTER";
     createdAt: Date;
 }
 
@@ -20,12 +20,12 @@ const clothingItemSchema = new Schema<IClothingItem>(
         articleType: {
             type: String,
             required: true,
-            enum: ["Top", "Bottom", "Dress_Jumpsuit", "Shoes", "Outerwear", "Accessories"]
+            enum: ["TOP", "BOTTOM", "DRESS_JUMPSUIT", "SHOES", "OUTERWEAR", "ACCESSORIES"]
         },
         color: {
             type: String,
             required: true,
-            enum: ["Red", "Green", "Blue", "Yellow", "Orange", "Pink", "Black", "White", "Grey", "Multi_Color"]
+            enum: ["RED", "GREEN", "BLUE", "YELLOW", "ORANGE", "PINK", "BLACK", "WHITE", "GREY", "MULTI_COLOR"]
         },
         size: {
             type: String,
@@ -35,7 +35,7 @@ const clothingItemSchema = new Schema<IClothingItem>(
         season: {
             type: String,
             required: true,
-            enum: ["Spring", "Summer", "Fall", "Winter"]
+            enum: ["SPRING", "SUMMER", "FALL", "WINTER"]
         },
     },
     { timestamps: true },
