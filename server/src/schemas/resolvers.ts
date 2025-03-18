@@ -16,11 +16,6 @@ interface LoginUserArgs {
   password: string;
 }
 
-// is being used to get other users - not used currently
-// interface UserArgs {
-//   username: string;
-// }
-
 interface AddClothingArgs {
   input: {
     image_url: string;
@@ -28,7 +23,6 @@ interface AddClothingArgs {
     color: string;
     size: string;
     season: string;
-    createdAt: Date;
   };
 }
 
@@ -39,9 +33,12 @@ interface UpdateClothingArgs {
     articleType?: string;
     color?: string;
     size?: string;
-    season: string;
-    createdAt: Date;
+    season?: string;
   };
+}
+
+interface DeleteClothingArgs {
+  id: string;
 }
 
 interface AddOutfitArgs {
@@ -56,17 +53,59 @@ interface AddOutfitArgs {
   };
 }
 
+interface UpdateOutfitArgs {
+  input: {
+    id: string;
+    userId: string;
+    topId?: string;
+    bottomId?: string;
+    dressJumpsuitId?: string;
+    shoesId?: string;
+    outerwearId?: string;
+    accessoriesIds?: string[];
+  };
+}
+
+interface DeleteOutfitArgs {
+  id: string;
+}
+
 const resolvers = {
   Query: {
-    // The 'me' query relies on the context to check if the user is authenticated
-    // Query to get current user and populate the clothing item and outfit data
-    me: async (_parent: any, _args: any, context: any) => {
-      // If the user is authenticated, find and return the user's information along with their thoughts
+    currentUser: async (_parent: any, _args: any, context: any) => {
       if (context.user) {
-        console.log("hello banana");
-        return User.findOne({ _id: context.user._id })
+        const user = await User.findOne({ _id: context.user._id })
+          // Populate both clothingItems and outfits
           .populate("clothingItems")
           .populate("outfits");
+
+        // Return the entire user object (which will include populated clothingItems and outfits)
+        return user;
+      }
+      throw new AuthenticationError("Could not authenticate user.");
+    },
+
+    // The 'me' query relies on the context to check if the user is authenticated
+    // Query to get current user and populate the clothing item and outfit data
+    myClothingItems: async (_parent: any, _args: any, context: any) => {
+      // If the user is authenticated, find and return the user's information along with their thoughts
+      if (context.user) {
+        const user = await User.findOne({ _id: context.user._id }).populate(
+          "clothingItems"
+        );
+        return user ? user.clothingItems : [];
+      }
+      // If the user is not authenticated, throw an AuthenticationError
+      throw new AuthenticationError("Could not authenticate user.");
+    },
+
+    myOutfits: async (_parent: any, _args: any, context: any) => {
+      // If the user is authenticated, find and return the user's information along with their thoughts
+      if (context.user) {
+        const user = await User.findOne({ _id: context.user._id }).populate(
+          "outfits"
+        );
+        return user ? user.outfits : [];
       }
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError("Could not authenticate user.");
@@ -74,14 +113,27 @@ const resolvers = {
 
     // Query to get a specific clothing item for update/delete
     clothingItem: async (_parent: any, { id }: { id: string }) => {
-      return ClothingItem.findById(id);
+      const item = await ClothingItem.findById(id);
+
+      if (!item) {
+        throw new Error("Clothing item not found");
+      }
+
+      return item;
     },
 
     // Query to get a specific outfit for update/delete
     outfit: async (_parent: any, { id }: { id: string }) => {
-      return Outfit.findById(id);
+      const outfit = await Outfit.findById(id);
+
+      if (!outfit) {
+        throw new Error("Outfit not found");
+      }
+
+      return outfit;
     },
   },
+
   Mutation: {
     addUser: async (_parent: any, { input }: AddUserArgs) => {
       // Check to see if user being created already exists
@@ -160,7 +212,7 @@ const resolvers = {
       // make sure user is valid
       if (!context.user) {
         throw new AuthenticationError(
-          "You must be logged in to add a new clothing item"
+          "You must be logged in to update a clothing item"
         );
       }
 
@@ -170,6 +222,7 @@ const resolvers = {
         throw new Error("Clothing item not found");
       }
 
+      // update the clothing item
       const updatedClothingItem = await ClothingItem.findByIdAndUpdate(
         input.id,
         { $set: input },
@@ -181,18 +234,18 @@ const resolvers = {
 
     deleteClothingItem: async (
       _parent: any,
-      { input }: UpdateClothingArgs,
+      { id }: DeleteClothingArgs,
       context: any
     ) => {
       // make sure user is valid
       if (!context.user) {
         throw new AuthenticationError(
-          "You must be logged in to add a new clothing item"
+          "You must be logged in to delete a clothing item"
         );
       }
 
       // Find the clothing item
-      const clothingItem = await ClothingItem.findById(input.id);
+      const clothingItem = await ClothingItem.findById(id);
       if (!clothingItem) {
         throw new Error("Clothing item not found");
       }
@@ -200,12 +253,12 @@ const resolvers = {
       // remove the clothing item from the clothingItems array in users
       await User.findByIdAndUpdate(
         context.user._id,
-        { $pull: { clothingItems: input.id } },
+        { $pull: { clothingItems: id } },
         { new: true }
       );
 
       // delete clothing item from database
-      await ClothingItem.findByIdAndDelete(input.id);
+      await ClothingItem.findByIdAndDelete(id);
 
       return { message: "Clothing item successfully deleted!" };
     },
@@ -214,11 +267,21 @@ const resolvers = {
       // make sure user is valid
       if (!context.user) {
         throw new AuthenticationError(
-          "You must be logged in to add a new clothing item"
+          "You must be logged in to add a new outfit"
         );
       }
 
-      // create clothing item
+      // make sure required clothing items exist
+      const requiredItems = await Promise.all([
+        ClothingItem.findById(input.topId),
+        ClothingItem.findById(input.bottomId),
+      ]);
+
+      if (requiredItems.includes(null)) {
+        throw new Error("One or more required clothing items do not exist");
+      }
+
+      // create new outfit
       const outfit = await Outfit.create({ ...input });
 
       // push the clothing item onto the clothingItems array on User
@@ -229,6 +292,74 @@ const resolvers = {
       );
 
       return outfit;
+    },
+
+    updateOutfit: async (
+      _parent: any,
+      { input }: UpdateOutfitArgs,
+      context: any
+    ) => {
+      // make sure user is valid
+      if (!context.user) {
+        throw new AuthenticationError(
+          "You must be logged in to update an outfit"
+        );
+      }
+
+      // Find the clothing item
+      const outfit = await Outfit.findById(input.id);
+      if (!outfit) {
+        throw new Error("Outfit not found");
+      }
+
+      // make sure creating user is same as updating user
+      if (context.user._id.toString() !== outfit.userId.toString()) {
+        throw new AuthenticationError("You can only modify your own outfits.");
+      }
+
+      const updatedOutfit = await Outfit.findByIdAndUpdate(
+        input.id,
+        { $set: input },
+        { new: true, runValidators: true }
+      );
+
+      return updatedOutfit;
+    },
+
+    deleteOutfit: async (
+      _parent: any,
+      { id }: DeleteOutfitArgs,
+      context: any
+    ) => {
+      // make sure user is valid
+      if (!context.user) {
+        throw new AuthenticationError(
+          "You must be logged in to delete an outfit"
+        );
+      }
+
+      // Find the outfit
+      const outfit = await Outfit.findById(id);
+      if (!outfit) {
+        throw new Error("Outfit not found");
+      }
+
+      // make sure creating user is same as updating user
+      if (context.user._id.toString() !== outfit.userId.toString()) {
+        throw new AuthenticationError("You can only modify your own outfits.");
+      }
+
+      // remove the outfit from the outfits array in users
+      await User.findByIdAndUpdate(
+        context.user._id,
+        { $pull: { outfits: id } },
+        { new: true }
+      );
+
+      // delete outfit from database
+      await Outfit.findByIdAndDelete(id);
+
+      return { message: "Outfit successfully deleted!" };
     },
   },
 };
