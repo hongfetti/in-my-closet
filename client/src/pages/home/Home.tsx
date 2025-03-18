@@ -4,10 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GET_CURRENT_USER } from "../../utils/queries";
 
 const Home = () => {
-  const {
-    data,
-    // loading, error
-  } = useQuery(GET_CURRENT_USER);
+  const { data } = useQuery(GET_CURRENT_USER);
   console.log("User:", GET_CURRENT_USER);
   console.log("Fetched Data:", data);
   // console.log("Loading:", loading);
@@ -18,11 +15,11 @@ const Home = () => {
 
   const userTopImageURLS =
     data?.currentUser.clothingItems.filter(
-      (clothingItem: any) => clothingItem.articleType === "Top"
+      (clothingItem: any) => clothingItem.articleType === "TOP"
     ) ?? [];
   const userBottomImageURLS =
     data?.currentUser.clothingItems.filter(
-      (clothingItem: any) => clothingItem.articleType === "Bottom"
+      (clothingItem: any) => clothingItem.articleType === "BOTTOM"
     ) ?? [];
 
   return (

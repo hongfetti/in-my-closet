@@ -2,6 +2,22 @@ import { User, ClothingItem, Outfit } from "../models/index.js";
 import { signToken, AuthenticationError } from "../utils/auth.js";
 
 // Define types for the arguments
+interface UserDocument {
+  username: string;
+  email: string;
+  password: string;
+}
+
+interface UserContext {
+  user: {
+    _id: string;
+    username: string;
+    email: string;
+    password: string;
+    location: string;
+  };
+}
+
 interface AddUserArgs {
   input: {
     username: string;
@@ -72,7 +88,11 @@ interface DeleteOutfitArgs {
 
 const resolvers = {
   Query: {
-    currentUser: async (_parent: any, _args: any, context: any) => {
+    currentUser: async (
+      _parent: any,
+      _args: any,
+      context: UserContext
+    ): Promise<UserDocument | null> => {
       if (context.user) {
         const user = await User.findOne({ _id: context.user._id })
           // Populate both clothingItems and outfits
@@ -80,6 +100,7 @@ const resolvers = {
           .populate("outfits");
 
         // Return the entire user object (which will include populated clothingItems and outfits)
+        console.log("USER:", user);
         return user;
       }
       throw new AuthenticationError("Could not authenticate user.");

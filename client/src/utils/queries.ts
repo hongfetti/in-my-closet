@@ -1,16 +1,22 @@
 import { gql } from "@apollo/client";
 
 export const GET_CURRENT_USER = gql`
-  query GetCurrentUser {
+  {
     currentUser {
       _id
       username
       email
       password
-      location
       clothingItems {
         _id
+        image_url
+        articleType
+        color
+        size
+        season
+        createdAt
       }
+      location
       outfits {
         _id
       }
