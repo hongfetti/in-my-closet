@@ -1,16 +1,22 @@
 import { gql } from "@apollo/client";
 
 export const GET_CURRENT_USER = gql`
-  query GetCurrentUser {
+  {
     currentUser {
       _id
       username
       email
       password
-      location
       clothingItems {
         _id
+        image_url
+        articleType
+        color
+        size
+        season
+        createdAt
       }
+      location
       outfits {
         _id
       }
@@ -33,17 +39,17 @@ export const GET_CLOTHING_ITEMS = gql`
 `;
 
 export const GET_CLOTHING_ITEM_BY_ID = gql`
-  query getClothingItemById ($clothingItemId: ID!) {
-  clothingItem(id: $clothingItemId) {
-    _id
-    image_url
-    articleType
-    color
-    size
-    season
-    createdAt
+  query getClothingItemById($clothingItemId: ID!) {
+    clothingItem(id: $clothingItemId) {
+      _id
+      image_url
+      articleType
+      color
+      size
+      season
+      createdAt
+    }
   }
-}
 `;
 
 export const GET_OUTFITS = gql`

@@ -36,20 +36,20 @@ const userSchema = new Schema<IUser>(
     outfits: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Outfit"
-      }
+        ref: "Outfit",
+      },
     ],
     clothingItems: [
       {
         type: Schema.Types.ObjectId,
-        ref: "ClothingItems"
-      }
+        ref: "ClothingItem",
+      },
     ],
     location: {
       type: String,
       required: true,
-      trim: true
-    }
+      trim: true,
+    },
   },
   {
     timestamps: true,
@@ -67,7 +67,9 @@ userSchema.pre<IUser>("save", async function (next) {
   next();
 });
 
-userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
+userSchema.methods.isCorrectPassword = async function (
+  password: string
+): Promise<boolean> {
   return bcrypt.compare(password, this.password);
 };
 
