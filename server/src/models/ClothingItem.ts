@@ -4,7 +4,7 @@ interface IClothingItem extends Document {
     _id: Types.ObjectId;
     image_url: string;
     articleType: "TOP" | "BOTTOM" | "DRESS_JUMPSUIT" | "SHOES" | "OUTERWEAR" | "ACCESSORIES";
-    color: "RED" | "GREEN" | "BLUE" | "YELLOW" | "ORANGE" | "PINK" | "BLACK" | "WHITE" | "GREY" | "MULTI_COLOR |;
+    color: "RED" | "GREEN" | "BLUE" | "YELLOW" | "ORANGE" | "PINK" | "BLACK" | "WHITE" | "GREY" | "MULTI_COLOR";
     size: "OS" | "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
     season: "SPRING" | "SUMMER" | "FALL" | "WINTER";
     createdAt: Date;

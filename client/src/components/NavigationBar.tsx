@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import currentWeatherData from "../utils/getWeather";
+import { WeatherResult } from "../utils/getWeather";
 import logo from "../assets/2.png"; 
 
 const NavigationBar = () => {
@@ -12,7 +13,7 @@ const NavigationBar = () => {
     const fetchWeather = async () => {
       try {
         const location = 'Orlando';
-        const data = await currentWeatherData(location);
+        const data = await currentWeatherData(location) as WeatherResult;
         console.log(data);
         setWeather(data);
         

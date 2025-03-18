@@ -121,7 +121,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    currentUser: [User] # This may need to just return one user and not a user array
+    currentUser: User
     myClothingItems: [ClothingItem]
     myOutfits: [Outfit]
     outfits: [Outfit]
