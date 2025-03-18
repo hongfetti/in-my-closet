@@ -27,16 +27,9 @@ export const ADD_USER = gql`
 }
 `;
 
-export const ADD_USER_AND_CLOTHING_ITEM = gql`
-  mutation addUserAndClothingItem($input: UserInput!, $clothingInput: ClothingItemInput!) {
-  addUser(input: $input) { 
-    token
-    user {
-      id
-      email
-      username
-    }
-  }
+export const ADD_CLOTHING_ITEM = gql`
+  mutation addClothingItem($clothingInput: ClothingItemInput!) {
+  
   addClothingItem(input: $clothingInput) {   
     id
     image_url
