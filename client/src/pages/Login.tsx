@@ -1,54 +1,94 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+
+import Auth from '../utils/auth';
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
-  const handleLogin = (event: React.FormEvent) => {
+  // update state based on form input changes
+  const handleChange = (event: ChangeEvent) => {
+    const { name, value } = event.target as HTMLInputElement;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  // submit form
+  const handleFormSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    // Placeholder for authentication logic
-    if (username === "admin" && password === "password") {
-      alert("Login successful!");
-      navigate("/dashboard");
-    } else {
-      alert("Invalid username or password");
+    console.log(formState);
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
     }
+
+    // clear form values
+    setFormState({
+      email: '',
+      password: '',
+    });
   };
 
   return (
-    <main className="d-flex justify-content-center align-items-center min-vh-100">
-      <div className="card p-4 shadow" style={{ width: "550px", backgroundColor: "#ffbe98" }}>
-      <h1 className="text-center mb-4" style={{ color: "#7669ea" }}>Login</h1>        <form onSubmit={handleLogin}>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
-            <input 
-              type="text" 
-              className="form-control" 
-              id="username" 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+    <main className="flex-row justify-center mb-4">
+      <div className="col-12 col-lg-10">
+        <div className="card">
+          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+          <div className="card-body">
+            {data ? (
+              <p>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
+              </p>
+            ) : (
+              <form onSubmit={handleFormSubmit}>
+                <input
+                  className="form-input"
+                  placeholder="Your email"
+                  name="email"
+                  type="email"
+                  value={formState.email}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="******"
+                  name="password"
+                  type="password"
+                  value={formState.password}
+                  onChange={handleChange}
+                />
+                <button
+                  className="btn btn-block btn-info"
+                  style={{ cursor: 'pointer' }}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            )}
+
+            {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+            )}
           </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input 
-              type="password" 
-              className="form-control" 
-              id="password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="btn w-100" style={{ backgroundColor: "#7669ea", color: "white" }}>Login</button>
-          </form>
+        </div>
       </div>
     </main>
   );
 };
 
 export default Login;
-
