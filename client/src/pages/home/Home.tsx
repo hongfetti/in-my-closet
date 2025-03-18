@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <main>
       <section className="container">
-        <h1>Home</h1>
+        <h1>Style It Up</h1>
 
         <Carousel id="carouselTop" />
         <Carousel id="carouselBottom" />
