@@ -27,18 +27,18 @@ export const ADD_USER = gql`
 }
 `;
 
+
 export const ADD_CLOTHING_ITEM = gql`
-  mutation addClothingItem($clothingInput: ClothingItemInput!) {
-  
-  addClothingItem(input: $clothingInput) {   
-    id
-    image_url
-    articleType
-    color
-    size
-    season
+  mutation AddClothingItem($input: ClothingItemInput!) {
+    addClothingItem(input: $input) {   
+      id
+      image_url
+      articleType
+      color
+      size
+      season
+    }
   }
-}
 `;
 
 export const ADD_OUTFIT = gql`
