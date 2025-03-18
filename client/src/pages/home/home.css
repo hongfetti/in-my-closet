@@ -1,2 +1,38 @@
 .btn-add {
 }
+
+.style-it-up {
+    color: #7669ea !important;
+    font-weight: bold;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px; /* Adjust spacing */
+  }
+  
+  .container h1.style-it-up {
+    color: #7669ea !important; /* Ensures high specificity */
+  }
+
+  .custom-btn {
+    background-color: #7669ea !important;
+    border: none !important;
+    color: white !important;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Hover Effect */
+  .custom-btn:hover {
+    background-color: #5a4cd6 !important; /* Slightly darker purple */
+    color: white !important;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .style-it-up {
+      font-size: 24px; /* Adjust font size for mobile */
+    }
+  }

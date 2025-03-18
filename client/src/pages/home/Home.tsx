@@ -5,14 +5,18 @@ const Home = () => {
   return (
     <main>
       <section className="container">
-        <h1>Style It Up</h1>
+        <h1 className="style-it-up">Style It Up</h1>
 
         <Carousel id="carouselTop" />
         <Carousel id="carouselBottom" />
       </section>
-      <Link className="page-nav" to="/add">
-        <button className="btn-add">Add Items</button>
-      </Link>
+
+      {/* Updated Bootstrap Button */}
+      <div className="d-flex justify-content-center mt-4">
+        <Link to="/add">
+          <button className="btn btn-primary custom-btn">Add Items</button>
+        </Link>
+      </div>
     </main>
   );
 };
