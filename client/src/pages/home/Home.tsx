@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import Carousel from "../../components/carousel/Carousel";
 import { useQuery } from "@apollo/client";
-import { QUERY_ME } from "../../utils/queries";
+import { GET_CURRENT_USER } from "../../utils/queries";
 
 const Home = () => {
-  const { data } = useQuery(QUERY_ME);
+  const { data } = useQuery(GET_CURRENT_USER);
   console.log(data);
 
   const userTopImageURLS = data.me.clothingItems.filter(
