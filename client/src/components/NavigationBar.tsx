@@ -62,9 +62,9 @@ const NavigationBar = () => {
 
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link fw-bold" to="/" style={{ color: "#7669ea" }}>Home</Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link className="nav-link fw-bold" to="/login" style={{ color: "#7669ea" }}>Login</Link>
             </li>
