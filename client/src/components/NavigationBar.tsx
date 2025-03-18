@@ -1,33 +1,45 @@
+// React imports
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import currentWeatherData from "../utils/getWeather";
 import { WeatherResult } from "../utils/getWeather";
-import logo from "../assets/2.png"; 
+import logo from "../assets/2.png";
+
+// GraphQL imports
+import { GET_CURRENT_USER } from "../utils/queries";
+import { useQuery } from "@apollo/client";
 
 const NavigationBar = () => {
   const [weather, setWeather] = useState<WeatherResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const { loading, data } = useQuery(GET_CURRENT_USER);
+
   useEffect(() => {
-    const fetchWeather = async () => {
+    const fetchWeather = async (location: string) => {
       try {
-        const location = 'Orlando';
-        const data = await currentWeatherData(location) as WeatherResult;
+        const data = (await currentWeatherData(location)) as WeatherResult;
         console.log(data);
         setWeather(data);
-        
       } catch (err) {
-        setError('Failed to fetch weather data');
+        setError("Failed to fetch weather data");
         console.error(err);
       }
     };
 
-    fetchWeather();
-  }, []);
+    if (data?.currentUser?.location) {
+      const userLocation = data.currentUser.location;
+      fetchWeather(userLocation);
+    }
+  }, [data]);
 
   return (
-    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#ffbe98" }}>
+    <nav
+      className="navbar navbar-expand-lg"
+      style={{ backgroundColor: "#ffbe98" }}
+    >
       <div className="container">
         {/* Navbar brand (logo or site title) */}
         <Link className="navbar-brand" to="/">
@@ -37,7 +49,10 @@ const NavigationBar = () => {
         {weather && (
           <div className="weather-info">
             <img src={weather.condition_icon} alt={weather.condition_text} />
-            <span>{weather.current_temp_f}, {weather.location_name}, {weather.location_region}</span>
+            <span>
+              {weather.current_temp_f}, {weather.location_name},{" "}
+              {weather.location_region}
+            </span>
           </div>
         )}
 
@@ -56,16 +71,25 @@ const NavigationBar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div
+          className="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/">Home</Link>
+              <Link className="nav-link text-dark" to="/">
+                Home
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/login">Login</Link>
+              <Link className="nav-link text-dark" to="/login">
+                Login
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/signup">Sign Up</Link>
+              <Link className="nav-link text-dark" to="/signup">
+                Sign Up
+              </Link>
             </li>
           </ul>
         </div>
@@ -75,7 +99,3 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
-
-
-
-
