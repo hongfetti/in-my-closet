@@ -33,7 +33,7 @@ const Add = () => {
   const handleImageUpload = (url: string) => {
     setSelectedItems((prev) => ({ ...prev, image_url: url }));
   };
-
+console.log(selectedItems)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -43,8 +43,9 @@ const Add = () => {
         },
       });
       console.log("Mutation Success:", data);
+      
     } catch (error) {
-      console.error("Mutation Error:", error);
+      console.error("Mutation Error So So Sad...:", error);
     }
   };
 
