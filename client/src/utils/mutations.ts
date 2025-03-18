@@ -31,7 +31,7 @@ export const ADD_USER = gql`
 export const ADD_CLOTHING_ITEM = gql`
   mutation AddClothingItem($input: ClothingItemInput!) {
     addClothingItem(input: $input) {   
-      id
+      _id
       image_url
       articleType
       color
