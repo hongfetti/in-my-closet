@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 const typeDefs = gql`
   type User {
@@ -22,7 +22,7 @@ const typeDefs = gql`
   }
 
   enum ArticleType {
-    TOP 
+    TOP
     BOTTOM
     DRESS_JUMPSUIT
     SHOES
@@ -63,7 +63,6 @@ const typeDefs = gql`
 
   type Outfit {
     _id: ID!
-    user: User!
     top: ClothingItem!
     bottom: ClothingItem!
     dressJumpsuit: ClothingItem
