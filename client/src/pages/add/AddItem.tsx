@@ -32,7 +32,7 @@ const Add = () => {
   const handleImageUpload = (url: string) => {
     setSelectedItems((prev) => ({ ...prev, image_url: url }));
   };
-console.log(selectedItems)
+  console.log(selectedItems);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -42,7 +42,6 @@ console.log(selectedItems)
         },
       });
       console.log("Mutation Success:", data);
-      
     } catch (error) {
       console.error("Mutation Error So So Sad...:", error);
     }
@@ -264,13 +263,17 @@ console.log(selectedItems)
           )}
         </div>
 
-        <div className="upload">
+        <div className="upload mt-4 w-50 text-center">
+          {/* <button type="button" className="btn add-button w-100">
+      Upload Image
+    </button> */}
           <UploadWidget setImageUrl={handleImageUpload} />
           {selectedItems.image_url && (
             <img
               src={selectedItems.image_url}
               alt="Profile Preview"
               width="400"
+              className="mt-3"
             />
           )}
         </div>
