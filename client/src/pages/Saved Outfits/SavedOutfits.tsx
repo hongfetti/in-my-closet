@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_ALL_MY_OUTFITS } from "../../utils/queries";
 
-const SavedOutfits = () => {
+const Saved = () => {
   const { loading, error, data } = useQuery(GET_ALL_MY_OUTFITS);
 
   if (loading) return <p>Loading Saved Outfits...</p>;
@@ -34,5 +34,5 @@ const SavedOutfits = () => {
   );
 };
 
-export default SavedOutfits;
+export default Saved;
 
