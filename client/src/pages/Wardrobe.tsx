@@ -1,14 +1,28 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_CURRENT_USER } from "../utils/queries";
 import { ClothingItems } from "../interfaces/ClothingItems";
+import { DELETE_CLOTHING_ITEM } from "../utils/mutations" 
 
 const Wardrobe = () => {
-  const { loading, error, data } = useQuery(GET_CURRENT_USER);
+  const { loading, error, data, refetch } = useQuery(GET_CURRENT_USER);
+  const [deleteClothingItem] = useMutation(DELETE_CLOTHING_ITEM)
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   console.log(data)
+const handleSubmit = async (id:string) => {
+  try {
+    const { data } = await deleteClothingItem({
+      variables: {
+        input: {id}
+      }
+    }) 
+    refetch ()
+  } catch (error) {
+    console.error(error);
+  }
+}
 
   return (
     <main className="container mt-5">
@@ -23,6 +37,15 @@ const Wardrobe = () => {
                 <p className="card-text">Color: {item.color}</p>
                 <p className="card-text">Size: {item.size}</p>
                 <p className="card-text">Season: {item.season}</p>
+                <button 
+                type="button"
+                className="btn uniform-button"
+          style={{ backgroundColor: "#7669EA", color: "white" }}
+          onClick={() => handleSubmit(item._id)}
+          disabled={loading || !!error}
+        >
+          {loading ? "Deleting..." : "As If! DELETE."}
+                </button>
               </div>
             </div>
           </div>

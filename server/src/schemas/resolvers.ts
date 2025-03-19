@@ -70,7 +70,9 @@ interface UpdateClothingArgs {
 }
 
 interface DeleteClothingArgs {
-  id: string;
+  input: {
+    id: string
+  };
 }
 
 interface AddOutfitArgs {
@@ -116,7 +118,7 @@ const resolvers = {
           .populate("outfits");
 
         // Return the entire user object (which will include populated clothingItems and outfits)
-        console.log("USER:", user);
+        // console.log("USER:", user);
         return user;
       }
       throw new AuthenticationError("Could not authenticate user.");
@@ -277,7 +279,7 @@ const resolvers = {
       { input }: AddClothingArgs,
       context: any
     ) => {
-      console.log(input);
+      // console.log(input);
       // make sure user is valid
       if (!context.user) {
         throw new AuthenticationError(
@@ -293,7 +295,7 @@ const resolvers = {
         season: input.season,
         image_url: input.image_url,
       });
-      console.log(clothingItem);
+      // console.log(clothingItem);
       // push the clothing item onto the clothingItems array on User
       await User.findByIdAndUpdate(
         context.user._id,
@@ -334,7 +336,7 @@ const resolvers = {
 
     deleteClothingItem: async (
       _parent: any,
-      { id }: DeleteClothingArgs,
+      { input }: DeleteClothingArgs,
       context: any
     ) => {
       // make sure user is valid
@@ -345,7 +347,7 @@ const resolvers = {
       }
 
       // Find the clothing item
-      const clothingItem = await ClothingItem.findById(id);
+      const clothingItem = await ClothingItem.findById(input.id);
       if (!clothingItem) {
         throw new Error("Clothing item not found");
       }
@@ -353,14 +355,15 @@ const resolvers = {
       // remove the clothing item from the clothingItems array in users
       await User.findByIdAndUpdate(
         context.user._id,
-        { $pull: { clothingItems: id } },
+        { $pull: { clothingItems: input.id } },
         { new: true }
       );
 
       // delete clothing item from database
-      await ClothingItem.findByIdAndDelete(id);
-
-      return { message: "Clothing item successfully deleted!" };
+    const deletedItem = await ClothingItem.findByIdAndDelete(input.id); 
+      
+console.log(deletedItem)
+      return deletedItem ;
     },
 
     addOutfit: async (_parent: any, { input }: AddOutfitArgs, context: any) => {
