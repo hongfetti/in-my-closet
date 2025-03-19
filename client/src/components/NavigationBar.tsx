@@ -9,6 +9,7 @@ import { WeatherResult } from "../utils/getWeather";
 // GraphQL imports
 import { GET_CURRENT_USER } from "../utils/queries";
 import { useQuery } from "@apollo/client";
+import auth from "../utils/auth";
 import logo from "../assets/in-my-closet-header-pic.png";
 
 const NavigationBar = () => {
@@ -18,10 +19,12 @@ const NavigationBar = () => {
   const { loading, data } = useQuery(GET_CURRENT_USER);
 
   useEffect(() => {
+    console.log("User Data:", data);
+
     const fetchWeather = async (location: string) => {
       try {
         const data = (await currentWeatherData(location)) as WeatherResult;
-        console.log(data);
+        console.log("Weather Data:", data);
         setWeather(data);
       } catch (err) {
         setError("Failed to fetch weather data");
@@ -32,6 +35,11 @@ const NavigationBar = () => {
     if (data?.currentUser?.location) {
       const userLocation = data.currentUser.location;
       fetchWeather(userLocation);
+    } else {
+      console.log("Something went wrong to end up here..");
+      console.log("I'm just going to go ahead and default to Tokyo");
+      const userLocation = "Tokyo";
+      fetchWeather(userLocation);
     }
   }, [data]);
 
@@ -41,7 +49,7 @@ const NavigationBar = () => {
       style={{ backgroundColor: "#ffbe98" }}
     >
       <div className="container">
-      <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/">
           <img
             src={logo}
             alt="In My Closet Logo"
@@ -82,17 +90,75 @@ const NavigationBar = () => {
           className="collapse navbar-collapse justify-content-end"
           id="navbarNav"
         >
-          <ul className="navbar-nav">
-            {/* <li className="nav-item">
+          {/* If user is logged in, show "Wardrobe", "Outfits", "Add Item", and "Logout" */}
+          {auth.loggedIn() ? (
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link
+                  className="nav-link fw-bold"
+                  // !ADD proper link
+                  to="/wardrobe"
+                  style={{ color: "#7669ea" }}
+                >
+                  Wardrobe
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link fw-bold"
+                  // !ADD proper link
+                  to="/outfits"
+                  style={{ color: "#7669ea" }}
+                >
+                  Outfits
+                </Link>
+              </li>{" "}
+              <li className="nav-item">
+                <Link
+                  className="nav-link fw-bold"
+                  // !ADD proper link
+                  to="/add-item"
+                  style={{ color: "#7669ea" }}
+                >
+                  Add Item
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link fw-bold"
+                  // !ADD proper link
+                  to="/logout"
+                  style={{ color: "#7669ea" }}
+                >
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className="navbar-nav">
+              {/* <li className="nav-item">
               <Link className="nav-link fw-bold" to="/" style={{ color: "#7669ea" }}>Home</Link>
             </li> */}
-            <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/login" style={{ color: "#7669ea" }}>Login</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/signup" style={{ color: "#7669ea" }}>Sign Up</Link>
-            </li>
-          </ul>
+              <li className="nav-item">
+                <Link
+                  className="nav-link fw-bold"
+                  to="/login"
+                  style={{ color: "#7669ea" }}
+                >
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link fw-bold"
+                  to="/signup"
+                  style={{ color: "#7669ea" }}
+                >
+                  Sign Up
+                </Link>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </nav>
