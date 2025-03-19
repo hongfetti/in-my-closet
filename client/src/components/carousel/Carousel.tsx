@@ -2,7 +2,6 @@ import React from "react";
 import "./carousel.css";
 import { ClothingItems } from "../../interfaces/ClothingItems";
 
-// Define the type for the component's props
 interface CarouselProps {
   id: string;
   images: ClothingItems[];
@@ -12,8 +11,9 @@ const Carousel: React.FC<CarouselProps> = ({ id, images }) => {
   return (
     <section className="carouselContainer">
       <div id={id} className="carousel slide" data-bs-ride="false">
+        {/* Previous Button */}
         <button
-          className="btn btn-primary me-2 control-prev"
+          className="btn custom-carousel-btn control-prev"
           type="button"
           data-bs-target={`#${id}`}
           data-bs-slide="prev"
@@ -34,7 +34,7 @@ const Carousel: React.FC<CarouselProps> = ({ id, images }) => {
         </div>
 
         <button
-          className="btn btn-primary control-next"
+          className="btn custom-carousel-btn control-next"
           type="button"
           data-bs-target={`#${id}`}
           data-bs-slide="next"
