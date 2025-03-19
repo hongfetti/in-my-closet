@@ -46,17 +46,19 @@ const NavigationBar = () => {
           My Closet
         </Link>
 
-        {weather && (
-          <div className="weather-info">
-            <img src={weather.condition_icon} alt={weather.condition_text} />
-            <span>
-              {weather.current_temp_f}, {weather.location_name},{" "}
-              {weather.location_region}
-            </span>
-          </div>
-        )}
-
-        {error && <div className="weather-error">{error}</div>}
+        {/* Weather Section */}
+        <div className="weather-info">
+          {loading && <span>Loading weather...</span>}
+          {weather && (
+            <>
+              <img src={weather.condition_icon} alt={weather.condition_text} />
+              <span>
+                {weather.current_temp_f}, {weather.location_name},{" "}
+                {weather.location_region}
+              </span>
+            </>
+          )}
+        </div>
 
         {/* Toggle button for mobile responsiveness */}
         <button
