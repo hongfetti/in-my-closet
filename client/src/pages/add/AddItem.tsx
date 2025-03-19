@@ -277,17 +277,16 @@ const Add = () => {
             />
           )}
         </div>
-
+<p></p>
         <button
-          type="button"
-          className="btn btn-primary"
-          onClick={handleSubmit}
-          disabled={loading || !!error}
-        >
-          {" "}
-          {/*on click stuff here*/}
-          {loading ? "Adding..." : "Add to closet"}
-        </button>
+  type="button"
+  className="btn uniform-button"
+  style={{ backgroundColor: "#7669EA", color: "white", width: "200px" }}
+  onClick={handleSubmit}
+  disabled={loading || !!error}
+>
+  {loading ? "Adding..." : "Add to Closet"}
+</button>
       </form>
     </main>
   );
