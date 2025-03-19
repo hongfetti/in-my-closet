@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
-import { GET_CLOTHING_ITEMS } from "../../utils/queries";
-import { ClothingItems } from "../../interfaces/ClothingItems";
+import { GET_CLOTHING_ITEMS } from "../utils/queries";
+import { ClothingItems } from "../interfaces/ClothingItems";
 
 const Wardrobe = () => {
   const { loading, error, data } = useQuery(GET_CLOTHING_ITEMS);
@@ -31,3 +31,4 @@ const Wardrobe = () => {
 };
 
 export default Wardrobe;
+
