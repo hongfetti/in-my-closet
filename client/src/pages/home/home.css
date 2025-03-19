@@ -1,0 +1,24 @@
+.btn-add {
+}
+
+/* Force "STYLE IT UP" to be #7669ea */
+h1{
+    color: #7669ea !important;
+    font-weight: bold;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px; /* Adjust spacing */
+  }
+  
+  /* Ensure higher specificity if needed */
+  .container h1.style-it-up {
+    color: #7669ea !important;
+  }
+  
+  /* Responsive Fix for Mobile */
+  @media (max-width: 768px) {
+    h1.style-it-up {
+      font-size: 24px; /* Adjust font size for smaller screens */
+    }
+  }
+  

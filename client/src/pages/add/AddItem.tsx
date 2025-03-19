@@ -1,18 +1,24 @@
 import { useState } from "react";
 import "./add.css";
-
+import UploadWidget from "../../components/Widget";
+import { useMutation } from "@apollo/client";
+import { ADD_CLOTHING_ITEM } from "../../utils/mutations";
 type DropdownKey = "articleType" | "size" | "color" | "season";
 
 const Add = () => {
   const [openDropdown, setOpenDropdown] = useState<DropdownKey | null>(null);
   const [selectedItems, setSelectedItems] = useState<
-    Record<DropdownKey, string>
+    Record<DropdownKey, string> & { image_url: string } //!! tacked this on here
   >({
     articleType: "Article type",
     size: "Size",
     color: "Color",
     season: "Season",
+    //!!Adding image url here as empty string
+    image_url: "",
   });
+
+  const [addClothingItem, { loading, error }] = useMutation(ADD_CLOTHING_ITEM); //!!Added use mutation stuff here
 
   const toggleDropdown = (dropdownName: DropdownKey) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
@@ -22,15 +28,36 @@ const Add = () => {
     setSelectedItems((prev) => ({ ...prev, [dropdownName]: item }));
     setOpenDropdown(null); // Close dropdown after selection
   };
+  //!!Chad's Change below
+  const handleImageUpload = (url: string) => {
+    setSelectedItems((prev) => ({ ...prev, image_url: url }));
+  };
+  console.log(selectedItems);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const { data } = await addClothingItem({
+        variables: {
+          input: selectedItems,
+        },
+      });
+      alert("Item added!");
+      console.log("Mutation Success:", data);
+      window.location.reload();
+    } catch (error) {
+      console.error("Mutation Error So So Sad...:", error);
+    }
+  };
 
   return (
-    <main>
-      <h1>Add Items</h1>
-      <form className="form">
+    <main className="d-flex flex-column justify-content-center align-items-center min-vh-100">
+      <h1 className="add-item-title">ADD ITEM</h1>
+
+      <form className="form d-flex flex-column align-items-center w-100">
         {/* Article Type Dropdown */}
-        <div className="dropdown btn-group">
+        <div className="dropdown btn-group w-50 text-center">
           <button
-            className="btn btn-secondary btn-lg dropdown-toggle"
+            className="btn dropdown-toggle w-100 py-2"
             type="button"
             onClick={() => toggleDropdown("articleType")}
             aria-expanded={openDropdown === "articleType"}
@@ -38,51 +65,50 @@ const Add = () => {
             {selectedItems.articleType}
           </button>
           {openDropdown === "articleType" && (
-            <ul className="dropdown-menu show">
+            <ul className="dropdown-menu show w-100 text-center">
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("articleType", "Top")}
+                onClick={() => handleSelect("articleType", "TOP")}
               >
-                Top
+                TOP
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("articleType", "Bottom")}
+                onClick={() => handleSelect("articleType", "BOTTOM")}
               >
-                Bottom
+                BOTTOM
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("articleType", "Dress/Jumpsuit")}
+                onClick={() => handleSelect("articleType", "DRESS/JUMPSUIT")}
               >
-                Dress/Jumpsuit
+                DRESS/JUMPSUIT
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("articleType", "Shoes")}
+                onClick={() => handleSelect("articleType", "SHOES")}
               >
-                Shoes
+                SHOES
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("articleType", "Outerwear")}
+                onClick={() => handleSelect("articleType", "OUTERWEAR")}
               >
-                Outerwear
+                OUTERWEAR
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("articleType", "Accessories")}
+                onClick={() => handleSelect("articleType", "ACCESSORIES")}
               >
-                Accessories
+                ACCESSORIES
               </li>
             </ul>
           )}
         </div>
 
-        {/* Size Dropdown */}
-        <div className="dropdown btn-group">
+        <div className="dropdown btn-group w-50 text-center mt-3">
           <button
-            className="btn btn-secondary btn-lg dropdown-toggle"
+            className="btn dropdown-toggle w-100 py-2"
             type="button"
             onClick={() => toggleDropdown("size")}
             aria-expanded={openDropdown === "size"}
@@ -90,13 +116,7 @@ const Add = () => {
             {selectedItems.size}
           </button>
           {openDropdown === "size" && (
-            <ul className="dropdown-menu show">
-              <li
-                className="dropdown-item"
-                onClick={() => handleSelect("size", "OS")}
-              >
-                OS
-              </li>
+            <ul className="dropdown-menu show w-100 text-center">
               <li
                 className="dropdown-item"
                 onClick={() => handleSelect("size", "XS")}
@@ -127,26 +147,13 @@ const Add = () => {
               >
                 XL
               </li>
-              <li
-                className="dropdown-item"
-                onClick={() => handleSelect("size", "XXL")}
-              >
-                XXL
-              </li>
-              <li
-                className="dropdown-item"
-                onClick={() => handleSelect("size", "3XL")}
-              >
-                3XL
-              </li>
             </ul>
           )}
         </div>
 
-        {/* Color Dropdown */}
-        <div className="dropdown btn-group">
+        <div className="dropdown btn-group w-50 text-center mt-3">
           <button
-            className="btn btn-secondary btn-lg dropdown-toggle"
+            className="btn dropdown-toggle w-100 py-2"
             type="button"
             onClick={() => toggleDropdown("color")}
             aria-expanded={openDropdown === "color"}
@@ -154,69 +161,74 @@ const Add = () => {
             {selectedItems.color}
           </button>
           {openDropdown === "color" && (
-            <ul className="dropdown-menu show">
+            <ul className="dropdown-menu show w-100 text-center">
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("color", "Red")}
+                onClick={() => handleSelect("color", "RED")}
               >
-                Red
+                RED
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("color", "Green")}
+                onClick={() => handleSelect("color", "BLUE")}
               >
-                Green
+                BLUE
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("color", "Yellow")}
+                onClick={() => handleSelect("color", "GREEN")}
               >
-                Yellow
+                GREEN
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("color", "Orange")}
+                onClick={() => handleSelect("color", "YELLOW")}
               >
-                Orange
+                YELLOW
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("color", "Pink")}
+                onClick={() => handleSelect("color", "ORANGE")}
               >
-                Pink
+                ORANGE
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("color", "Black")}
+                onClick={() => handleSelect("color", "PINK")}
               >
-                Black
+                PINK
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("color", "White")}
+                onClick={() => handleSelect("color", "BLACK")}
               >
-                White
+                BLACK
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("color", "Grey")}
+                onClick={() => handleSelect("color", "WHITE")}
               >
-                Grey
+                WHITE
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("color", "Multi-Color")}
+                onClick={() => handleSelect("color", "GREY")}
               >
-                Multi-Color
+                GREY
+              </li>
+              <li
+                className="dropdown-item"
+                onClick={() => handleSelect("color", "MULTI-COLOR")}
+              >
+                MULTI-COLOR
               </li>
             </ul>
           )}
         </div>
 
-        {/* Season Dropdown */}
-        <div className="dropdown btn-group">
+        <div className="dropdown btn-group w-50 text-center mt-3">
           <button
-            className="btn btn-secondary btn-lg dropdown-toggle"
+            className="btn dropdown-toggle w-100 py-2"
             type="button"
             onClick={() => toggleDropdown("season")}
             aria-expanded={openDropdown === "season"}
@@ -224,37 +236,58 @@ const Add = () => {
             {selectedItems.season}
           </button>
           {openDropdown === "season" && (
-            <ul className="dropdown-menu show">
+            <ul className="dropdown-menu show w-100 text-center">
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("season", "Spring")}
+                onClick={() => handleSelect("season", "WINTER")}
               >
-                Spring
+                WINTER
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("season", "Summer")}
+                onClick={() => handleSelect("season", "SPRING")}
               >
-                Summer
+                SPRING
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("season", "Fall")}
+                onClick={() => handleSelect("season", "SUMMER")}
               >
-                Fall
+                SUMMER
               </li>
               <li
                 className="dropdown-item"
-                onClick={() => handleSelect("season", "Winter")}
+                onClick={() => handleSelect("season", "FALL")}
               >
-                Winter
+                FALL
               </li>
             </ul>
           )}
         </div>
 
-        <button type="button" className="btn btn-primary">
-          Add to closet
+        <div className="upload mt-4 w-50 text-center">
+          {/* <button type="button" className="btn add-button w-100">
+      Upload Image
+    </button> */}
+          <UploadWidget setImageUrl={handleImageUpload} />
+          {selectedItems.image_url && (
+            <img
+              src={selectedItems.image_url}
+              alt="Profile Preview"
+              width="400"
+              className="mt-3"
+            />
+          )}
+        </div>
+        <p></p>
+        <button
+          type="button"
+          className="btn uniform-button"
+          style={{ backgroundColor: "#7669EA", color: "white", width: "200px" }}
+          onClick={handleSubmit}
+          disabled={loading || !!error}
+        >
+          {loading ? "Adding..." : "Add to Closet"}
         </button>
       </form>
     </main>

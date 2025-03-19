@@ -1,9 +1,122 @@
-.form {
+A.form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .btn-group {
-  margin-bottom: 50px;
+  margin-bottom: 10;
+}
+
+.center-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
+  text-align: center;
+}
+
+.add-item-title {
+  color: #7669ea !important; 
+  font-weight: bold;
+}
+
+.uniform-button {
+  width: 250px;  
+  height: 50px;  
+  font-size: 16px; 
+  text-align: center;
+}
+
+/* DEFAULT STYLING */
+.dropdown-toggle {
+  color: #7669ea !important; 
+  background-color: white !important;
+  border: 2px solid #7669ea !important; 
+}
+
+/* DROPDOWN STYLING*/
+.dropdown-toggle:focus,
+.dropdown-toggle:active {
+  background-color: white !important;
+  color: #7669ea !important;
+  box-shadow: none !important;
+}
+
+/* DROPDOWN MENU ITEMS */
+.dropdown-item {
+  color: #7669ea !important; 
+  background-color: white !important;
+}
+
+/* DROPDOWN HOVER */
+.dropdown-item:hover {
+  background-color: #e6e4fa !important;
+  color: #5a50c1 !important;
+}
+
+.add-button {
+  background-color: #7669ea !important; 
+  color: white !important; 
+  border: none !important;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.add-button:hover {
+  background-color: #5a50c1 !important; 
+}
+
+.add-button:active {
+  background-color: #4a42a5 !important; 
+}
+
+body {
+  background-image: url(../../assets/IN_MY_CLOSET_WEB.png);
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-attachment: fixed; 
+}
+
+@media (max-width: 768px) {
+  .dropdown.btn-group {
+    width: 80% !important; /* Makes dropdowns wider */
+  }
+
+  .dropdown-toggle {
+    width: 100% !important; /* Ensures full width inside container */
+    font-size: 18px !important; /* Increases text size */
+    padding: 12px !important; /* Adds spacing */
+  }
+
+  .dropdown-menu {
+    width: 100% !important; /* Makes dropdown menu match button width */
+  }
+}
+
+@media (max-width: 768px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .upload {
+    width: 80% !important; /* Matches dropdown width */
+  }
+  .uniform-button {
+    width: 120% !important; /* Increases button width to fit text */
+    max-width: 400px !important; /* Prevents them from being too wide */
+    text-align: center;
+    display: block;
+    margin: 10px auto; /* Centers buttons */
+    font-size: 18px !important; /* Makes text readable */
+    padding: 12px !important; /* Adds more button padding */
+  }
 }
