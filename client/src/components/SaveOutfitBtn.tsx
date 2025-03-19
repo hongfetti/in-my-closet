@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 // import { useState } from "react";
 import { ADD_OUTFIT } from "../utils/mutations";
-import { bottle } from "@cloudinary/url-gen/qualifiers/focusOn";
+// import { bottle } from "@cloudinary/url-gen/qualifiers/focusOn";
 
 interface SaveOutfitButtonProps {
   topId: string | null;
@@ -37,7 +37,18 @@ const SaveOutfitButton: React.FC<SaveOutfitButtonProps> = ({
   };
 
   return (
-    <button onClick={handleSaveOutfit} disabled={loading}>
+    <button
+      onClick={handleSaveOutfit}
+      disabled={loading}
+      style={{
+        backgroundColor: "#7669EA",
+        color: "white",
+        marginTop: "20px",
+        padding: "10px 20px",
+        borderRadius: "10px",
+        width: "150px",
+      }}
+    >
       {loading ? "Saving..." : "Save This Outfit!"}
     </button>
   );
