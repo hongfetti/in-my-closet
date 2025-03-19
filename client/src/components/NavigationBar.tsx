@@ -60,18 +60,26 @@ const NavigationBar = () => {
         </Link>
 
         {/* Weather Section */}
-        <div className="weather-info">
-          {loading && <span>Loading weather...</span>}
-          {weather && (
-            <>
-              <img src={weather.condition_icon} alt={weather.condition_text} />
-              <span>
-                {weather.current_temp_f}, {weather.location_name},{" "}
-                {weather.location_region}
-              </span>
-            </>
-          )}
-        </div>
+        {auth.loggedIn() ? (
+          <div className="weather-info">
+            {loading && <span>Loading weather...</span>}
+            {weather && (
+              <>
+                <img
+                  src={weather.condition_icon}
+                  alt={weather.condition_text}
+                />
+                <span>
+                  {weather.current_temp_f}, {weather.location_name},{" "}
+                  {weather.location_region}
+                </span>
+              </>
+            )}
+          </div>
+        ) : (
+          // TODO: I don't actually want this here, but it made me :(
+          <p></p>
+        )}
 
         {/* Toggle button for mobile responsiveness */}
         <button
