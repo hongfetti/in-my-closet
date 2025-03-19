@@ -75,26 +75,26 @@ interface DeleteClothingArgs {
 
 interface AddOutfitArgs {
   input: {
-    // userId: string;
+    //  userId: string;
     topId: string;
     bottomId: string;
-    // dressJumpsuitId?: string;
-    // shoesId?: string;
-    // outerwearId?: string;
-    // accessoriesIds?: string[];
+     dressJumpsuitId?: string;
+     shoesId?: string;
+     outerwearId?: string;
+     accessoriesIds?: string[];
   };
 }
 
 interface UpdateOutfitArgs {
   input: {
     id: string;
-    // userId: string;
+    //  userId: string;
     topId?: string;
     bottomId?: string;
-    // dressJumpsuitId?: string;
-    // shoesId?: string;
-    // outerwearId?: string;
-    // accessoriesIds?: string[];
+     dressJumpsuitId?: string;
+     shoesId?: string;
+     outerwearId?: string;
+     accessoriesIds?: string[];
   };
 }
 
@@ -404,7 +404,7 @@ const resolvers = {
         throw new Error("Outfit not found");
       }
 
-      // make sure creating user is same as updating user
+      //make sure creating user is same as updating user
       // if (context.user._id.toString() !== outfit.userId.toString()) {
       //   throw new AuthenticationError("You can only modify your own outfits.");
       // }
