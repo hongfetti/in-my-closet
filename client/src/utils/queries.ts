@@ -74,36 +74,36 @@ export const GET_OUTFITS = gql`
         season
         createdAt
       }
-      dressJumpsuit {
-        _id
-        image_url
-        articleType
-        color
-        size
-        season
-        createdAt
-      }
-      shoes {
-        _id
-        image_url
-        articleType
-        color
-        size
-        season
-        createdAt
-      }
-      outerwear {
-        _id
-        image_url
-        articleType
-        color
-        size
-        season
-        createdAt
-      }
-      accessories {
-        _id
-      }
+      # dressJumpsuit {
+      #   _id
+      #   image_url
+      #   articleType
+      #   color
+      #   size
+      #   season
+      #   createdAt
+      # }
+      # shoes {
+      #   _id
+      #   image_url
+      #   articleType
+      #   color
+      #   size
+      #   season
+      #   createdAt
+      # }
+      # outerwear {
+      #   _id
+      #   image_url
+      #   articleType
+      #   color
+      #   size
+      #   season
+      #   createdAt
+      # }
+      # accessories {
+      #   _id
+      # }
     }
   }
 `;
@@ -145,36 +145,36 @@ export const GET_OUTFIT_BY_ID = gql`
         season
         createdAt
       }
-      dressJumpsuit {
-        _id
-        image_url
-        articleType
-        color
-        size
-        season
-        createdAt
-      }
-      shoes {
-        _id
-        image_url
-        articleType
-        color
-        size
-        season
-        createdAt
-      }
-      outerwear {
-        _id
-        image_url
-        articleType
-        color
-        size
-        season
-        createdAt
-      }
-      accessories {
-        _id
-      }
+      # dressJumpsuit {
+      #   _id
+      #   image_url
+      #   articleType
+      #   color
+      #   size
+      #   season
+      #   createdAt
+      # }
+      # shoes {
+      #   _id
+      #   image_url
+      #   articleType
+      #   color
+      #   size
+      #   season
+      #   createdAt
+      # }
+      # outerwear {
+      #   _id
+      #   image_url
+      #   articleType
+      #   color
+      #   size
+      #   season
+      #   createdAt
+      # }
+      # accessories {
+      #   _id
+      # }
     }
   }
 `;
