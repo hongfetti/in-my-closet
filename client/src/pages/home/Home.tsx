@@ -75,9 +75,6 @@ const Home = () => {
         />
       </section>
       <section className="btn-section">
-        <Link className="page-nav" to="/add">
-          <button className="btn-add">Add Items</button>
-        </Link>
         <SaveOutfitButton topId={selectedTop} bottomId={selectedBottom} />
       </section>
       <Link className="page-nav" to="/add">

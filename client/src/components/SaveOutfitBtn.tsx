@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/client";
 // import { useState } from "react";
 import { ADD_OUTFIT } from "../utils/mutations";
+import { bottle } from "@cloudinary/url-gen/qualifiers/focusOn";
 
 interface SaveOutfitButtonProps {
   topId: string | null;
@@ -18,7 +19,7 @@ const SaveOutfitButton: React.FC<SaveOutfitButtonProps> = ({
       alert("Please select two items to save an outfit.");
       return;
     }
-
+    console.log("TOP AND BOTTOM:", topId, bottomId);
     try {
       await addOutfit({
         variables: {

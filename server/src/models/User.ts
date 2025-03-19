@@ -42,7 +42,7 @@ const userSchema = new Schema<IUser>(
     clothingItems: [
       {
         type: Schema.Types.ObjectId,
-        ref: "ClothingItem",
+        ref: "ClothingItems",
       },
     ],
     location: {

@@ -319,7 +319,7 @@ const resolvers = {
         { new: true }
       );
 
-      return outfit;
+      return outfit.populate([{ path: "topId" }, { path: "bottomId" }]);
     },
 
     updateOutfit: async (
