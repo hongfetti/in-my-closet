@@ -56,6 +56,7 @@ export const GET_OUTFITS = gql`
   query getOutfits {
     outfits {
       _id
+      userId
       top {
         _id
         image_url
@@ -112,6 +113,7 @@ export const GET_ALL_MY_OUTFITS = gql`
 query MyOutfits {
   myOutfits {
     _id
+    userId
     top {
       _id
       image_url

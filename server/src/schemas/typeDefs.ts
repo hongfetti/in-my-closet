@@ -64,12 +64,13 @@ const typeDefs = gql`
 
   type Outfit {
     _id: ID!
+    user: ID!
     top: ClothingItem
     bottom: ClothingItem
-    # dressJumpsuit: ClothingItem
-    # shoes: ClothingItem
-    # outerwear: ClothingItem
-    # accessories: [ClothingItem]
+     dressJumpsuit: ClothingItem
+     shoes: ClothingItem
+     outerwear: ClothingItem
+     accessories: [ClothingItem]
   }
 
   input UserInput {
@@ -115,20 +116,20 @@ const typeDefs = gql`
     userId: ID!
     topId: ID!
     bottomId: ID!
-    # dressJumpsuitId: ID
-    # shoesId: ID
-    # outerwearId: ID
-    # accessoriesIds: [ID!]
+     dressJumpsuitId: ID
+     shoesId: ID
+     outerwearId: ID
+     accessoriesIds: [ID!]
   }
 
   input UpdateOutfitInput {
     id: ID!
     topId: ID
     bottomId: ID
-    # dressJumpsuitId: ID
-    # shoesId: ID
-    # outerwearId: ID
-    # accessoriesIds: [ID!]
+     dressJumpsuitId: ID
+     shoesId: ID
+     outerwearId: ID
+     accessoriesIds: [ID!]
   }
 
   input DeleteOutfitInput {
