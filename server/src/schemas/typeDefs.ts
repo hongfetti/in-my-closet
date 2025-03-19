@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { Outfit } from "../models";
 
 const typeDefs = gql`
   type User {
@@ -142,5 +143,5 @@ const typeDefs = gql`
     deleteOutfit(id: ID!): Outfit
   }
 `;
-
-export default typeDefs;
+;
+export default typeDefs; 

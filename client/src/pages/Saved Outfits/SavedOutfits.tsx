@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_ALL_MY_OUTFITS } from "../../utils/queries";
-
+//import  { Outfit }   from "../../../../server/src/schemas/typeDefs.js"
 const Saved = () => {
   const { loading, error, data } = useQuery(GET_ALL_MY_OUTFITS);
 
