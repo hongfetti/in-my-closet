@@ -110,11 +110,13 @@ body {
   .upload {
     width: 80% !important; /* Matches dropdown width */
   }
-
   .uniform-button {
-    width: 80% !important; /* Makes buttons same width as dropdowns */
+    width: 120% !important; /* Increases button width to fit text */
+    max-width: 400px !important; /* Prevents them from being too wide */
     text-align: center;
     display: block;
     margin: 10px auto; /* Centers buttons */
+    font-size: 18px !important; /* Makes text readable */
+    padding: 12px !important; /* Adds more button padding */
   }
 }
