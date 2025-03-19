@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./carousel.css";
 import { ClothingItems } from "../../interfaces/ClothingItems";
 
 interface CarouselProps {
   id: string;
   images: ClothingItems[];
+  onUpdateVisibleItem: (id: string) => void; // Pass visible item to parent
 }
 
-const Carousel: React.FC<CarouselProps> = ({ id, images }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  id,
+  images,
+  onUpdateVisibleItem,
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length > 0) {
+      onUpdateVisibleItem(images[currentIndex]._id); //?????????????
+    }
+  }, [currentIndex, images, onUpdateVisibleItem]);
+
+  const nextItem = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const prevItem = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
+  };
+
   return (
     <section className="carouselContainer">
       <div id={id} className="carousel slide" data-bs-ride="false">
@@ -17,13 +40,19 @@ const Carousel: React.FC<CarouselProps> = ({ id, images }) => {
           type="button"
           data-bs-target={`#${id}`}
           data-bs-slide="prev"
+          onClick={prevItem}
         >
           ←
         </button>
 
         <div className="carousel-inner">
-          {images.map((image) => (
-            <div key={image.image_url} className="carousel-item active">
+          {images.map((image, index) => (
+            <div
+              key={image._id || index}
+              className={`carousel-item ${
+                index === currentIndex ? "active" : ""
+              }`}
+            >
               <img
                 src={image.image_url}
                 className="closet-item d-block w-100"
@@ -38,6 +67,7 @@ const Carousel: React.FC<CarouselProps> = ({ id, images }) => {
           type="button"
           data-bs-target={`#${id}`}
           data-bs-slide="next"
+          onClick={nextItem}
         >
           →
         </button>

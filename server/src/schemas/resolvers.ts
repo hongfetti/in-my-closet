@@ -75,26 +75,26 @@ interface DeleteClothingArgs {
 
 interface AddOutfitArgs {
   input: {
-    userId: string;
+    // userId: string;
     topId: string;
     bottomId: string;
-    dressJumpsuitId?: string;
-    shoesId?: string;
-    outerwearId?: string;
-    accessoriesIds?: string[];
+    // dressJumpsuitId?: string;
+    // shoesId?: string;
+    // outerwearId?: string;
+    // accessoriesIds?: string[];
   };
 }
 
 interface UpdateOutfitArgs {
   input: {
     id: string;
-    userId: string;
+    // userId: string;
     topId?: string;
     bottomId?: string;
-    dressJumpsuitId?: string;
-    shoesId?: string;
-    outerwearId?: string;
-    accessoriesIds?: string[];
+    // dressJumpsuitId?: string;
+    // shoesId?: string;
+    // outerwearId?: string;
+    // accessoriesIds?: string[];
   };
 }
 
@@ -383,7 +383,7 @@ const resolvers = {
         { new: true }
       );
 
-      return outfit;
+      return outfit.populate([{ path: "topId" }, { path: "bottomId" }]);
     },
 
     updateOutfit: async (
@@ -405,9 +405,9 @@ const resolvers = {
       }
 
       // make sure creating user is same as updating user
-      if (context.user._id.toString() !== outfit.userId.toString()) {
-        throw new AuthenticationError("You can only modify your own outfits.");
-      }
+      // if (context.user._id.toString() !== outfit.userId.toString()) {
+      //   throw new AuthenticationError("You can only modify your own outfits.");
+      // }
 
       const updatedOutfit = await Outfit.findByIdAndUpdate(
         input.id,
@@ -437,9 +437,9 @@ const resolvers = {
       }
 
       // make sure creating user is same as updating user
-      if (context.user._id.toString() !== outfit.userId.toString()) {
-        throw new AuthenticationError("You can only modify your own outfits.");
-      }
+      // if (context.user._id.toString() !== outfit.userId.toString()) {
+      //   throw new AuthenticationError("You can only modify your own outfits.");
+      // }
 
       // remove the outfit from the outfits array in users
       await User.findByIdAndUpdate(
