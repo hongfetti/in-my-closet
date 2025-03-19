@@ -65,8 +65,8 @@ const typeDefs = gql`
   type Outfit {
     _id: ID!
     user: ID!
-    top: ClothingItem
-    bottom: ClothingItem
+    topId: ClothingItem
+    bottomId: ClothingItem
      dressJumpsuit: ClothingItem
      shoes: ClothingItem
      outerwear: ClothingItem

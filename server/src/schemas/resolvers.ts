@@ -78,10 +78,10 @@ interface AddOutfitArgs {
     //  userId: string;
     topId: string;
     bottomId: string;
-     dressJumpsuitId?: string;
-     shoesId?: string;
-     outerwearId?: string;
-     accessoriesIds?: string[];
+    dressJumpsuitId?: string;
+    shoesId?: string;
+    outerwearId?: string;
+    accessoriesIds?: string[];
   };
 }
 
@@ -91,10 +91,10 @@ interface UpdateOutfitArgs {
     //  userId: string;
     topId?: string;
     bottomId?: string;
-     dressJumpsuitId?: string;
-     shoesId?: string;
-     outerwearId?: string;
-     accessoriesIds?: string[];
+    dressJumpsuitId?: string;
+    shoesId?: string;
+    outerwearId?: string;
+    accessoriesIds?: string[];
   };
 }
 
@@ -141,7 +141,15 @@ const resolvers = {
       if (context.user) {
         const user = await User.findOne({ _id: context.user._id }).populate(
           "outfits"
-        );
+        ).populate({
+          path: "outfits",
+          populate: [{
+            path: "topId",
+          },
+          {
+            path: "bottomId"
+          }]
+        });
         return user ? user.outfits : [];
       }
       // If the user is not authenticated, throw an AuthenticationError
@@ -196,27 +204,27 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError("You must be logged in to update your profile.");
       }
-    
+
       if (context.user._id.toString() !== input.id) {
         throw new AuthenticationError("You can only update your own profile.");
       }
-    
+
       const user = await User.findById(input.id);
       if (!user) {
         throw new Error("User not found.");
       }
-    
+
       // Only update the password if it's provided, triggering the pre-save hook
       if (input.password) {
         user.password = input.password;  // The pre-save hook will hash it automatically
       }
-    
+
       // Update other fields
       Object.assign(user, input);
-      
+
       // Save the updated user
       await user.save();
-    
+
       return user;
     },
 
@@ -224,19 +232,19 @@ const resolvers = {
       if (!context.user || context.user._id.toString() !== input.id) {
         throw new AuthenticationError("You can only delete your own account.");
       }
-    
+
       const user = await User.findById(input.id);
       if (!user) {
         throw new Error("User not found.");
       }
-    
+
       // Delete associated clothing items and outfits
       await ClothingItem.deleteMany({ _id: { $in: user.clothingItems } });
       await Outfit.deleteMany({ _id: { $in: user.outfits } });
-    
+
       // Delete the user
       await User.findByIdAndDelete(input.id);
-    
+
       return { message: "User successfully deleted." };
     },
 
