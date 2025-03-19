@@ -38,9 +38,14 @@ const UploadWidget = ({ setImageUrl }: { setImageUrl: (url: string) => void }) =
   }, [setImageUrl]);
 
   return (
-    <button type="button" className="btn btn-primary" onClick={() => widgetRef.current?.open()}>
-      Add Item Photo
-    </button>
+    <button
+  type="button"
+  className="btn uniform-button"
+  style={{ backgroundColor: "#7669EA", color: "white", width: "200px" }}
+  onClick={() => widgetRef.current?.open()}
+>
+  Add Item Photo
+</button>
   );
 };
 

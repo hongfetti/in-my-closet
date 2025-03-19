@@ -11,6 +11,7 @@ import { GET_CURRENT_USER } from "../utils/queries";
 import { useQuery } from "@apollo/client";
 import auth from "../utils/auth";
 import logo from "../assets/in-my-closet-header-pic.png";
+import "./nav.css"
 
 const NavigationBar = () => {
   const [weather, setWeather] = useState<WeatherResult | null>(null);

@@ -82,3 +82,39 @@ body {
   background-position: center; 
   background-attachment: fixed; 
 }
+
+@media (max-width: 768px) {
+  .dropdown.btn-group {
+    width: 80% !important; /* Makes dropdowns wider */
+  }
+
+  .dropdown-toggle {
+    width: 100% !important; /* Ensures full width inside container */
+    font-size: 18px !important; /* Increases text size */
+    padding: 12px !important; /* Adds spacing */
+  }
+
+  .dropdown-menu {
+    width: 100% !important; /* Makes dropdown menu match button width */
+  }
+}
+
+@media (max-width: 768px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .upload {
+    width: 80% !important; /* Matches dropdown width */
+  }
+
+  .uniform-button {
+    width: 80% !important; /* Makes buttons same width as dropdowns */
+    text-align: center;
+    display: block;
+    margin: 10px auto; /* Centers buttons */
+  }
+}
