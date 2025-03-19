@@ -75,6 +75,6 @@ const clothingItemSchema = new Schema<IClothingItem>(
   { timestamps: true }
 );
 
-const ClothingItem = model<IClothingItem>("ClothingItem", clothingItemSchema);
+const ClothingItem = model<IClothingItem>("ClothingItems", clothingItemSchema);
 
 export default ClothingItem;

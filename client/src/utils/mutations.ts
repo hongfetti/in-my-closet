@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
@@ -15,22 +15,21 @@ export const LOGIN_USER = gql`
 export const ADD_USER = gql`
   mutation addUser($input: UserInput!) {
     addUser(input: $input) {
-    user {
-      _id
-      username
-      email
-      password
-      location
+      user {
+        _id
+        username
+        email
+        password
+        location
+      }
+      token
     }
-    token
   }
-}
 `;
-
 
 export const ADD_CLOTHING_ITEM = gql`
   mutation AddClothingItem($input: ClothingItemInput!) {
-    addClothingItem(input: $input) {   
+    addClothingItem(input: $input) {
       _id
       image_url
       articleType
@@ -43,29 +42,29 @@ export const ADD_CLOTHING_ITEM = gql`
 
 export const ADD_OUTFIT = gql`
   mutation addOutfit($input: OutfitInput!) {
-  addOutfit(input: $input) {
-    _id
-    user {
+    addOutfit(input: $input) {
       _id
-    }
-    top {
-      _id
-    }
-    bottom {
-      _id
-    }
-    dressJumpsuit {
-      _id
-    }
-    shoes {
-      _id
-    }
-    outerwear {
-      _id
-    }
-    accessories {
-      _id
+      # user {
+      #   _id
+      # }
+      top {
+        _id
+      }
+      bottom {
+        _id
+      }
+      # dressJumpsuit {
+      #   _id
+      # }
+      # shoes {
+      #   _id
+      # }
+      # outerwear {
+      #   _id
+      # }
+      # accessories {
+      #   _id
+      # }
     }
   }
-}
 `;
