@@ -9,7 +9,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ErrorPage from "./pages/Error";
 import Add from "./pages/add/AddItem";
-import Saved from "./pages/SavedOutfits";
+import Saved from "./pages/Saved Outfits/SavedOutfits.js";
 import Wardrobe from "./pages/Wardrobe";
 
 const router = createBrowserRouter([

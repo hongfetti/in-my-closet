@@ -1,0 +1,35 @@
+.saved-outfits {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .outfits-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .outfit-card {
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 20px;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .outfit-image {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .outfit-image .top,
+  .outfit-image .bottom {
+    width: 45%;
+  }
+  
+  .outfit-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
