@@ -7,7 +7,7 @@ const Saved = () => {
   if (loading) return <p>Loading Saved Outfits...</p>;
   if (error) return <p>Error: {error.message}</p>
 
-
+console.log("im right Here" , data)
   return (
     <div className="saved-outfits">
       <h1>Your Saved Outfits</h1>
@@ -20,10 +20,10 @@ const Saved = () => {
               <h3>Outfit ID: {outfit._id}</h3>
               <div className="outfit-image">
                 <div className="top">
-                  <img src={outfit.top.image_url} alt="Top" />
+                  <img src={outfit.top?.image_url || ''} alt="Top" />
                 </div>
                 <div className="bottom">
-                  <img src={outfit.bottom.image_url} alt="Bottom" />
+                  <img src={outfit.bottom?.image_url || ''} alt="Bottom" />
                 </div>
               </div>
             </div>

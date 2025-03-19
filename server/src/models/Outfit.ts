@@ -3,7 +3,7 @@ import ClothingItem from "./ClothingItem.js";
 
 interface IOutfit extends Document {
   _id: Types.ObjectId;
-   userId: Schema.Types.ObjectId;
+  //  userId: Schema.Types.ObjectId;
   topId: Schema.Types.ObjectId;
   bottomId: Schema.Types.ObjectId;
    dressJumpsuitId?: Schema.Types.ObjectId;
@@ -13,11 +13,11 @@ interface IOutfit extends Document {
 }
 
 const outfitSchema = new Schema<IOutfit>({
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    // userId: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
   topId: {
     type: Schema.Types.ObjectId,
     ref: "ClothingItems",

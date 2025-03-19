@@ -86,27 +86,27 @@ export const ADD_OUTFIT = gql`
   mutation addOutfit($input: OutfitInput!) {
     addOutfit(input: $input) {
       _id
-       user {
-         _id
-       }
+      #  user {
+      #    _id
+      #  }
       top {
         _id
       }
       bottom {
         _id
       }
-       dressJumpsuit {
-         _id
-       }
-       shoes {
-         _id
-       }
-       outerwear {
-         _id
-       }
-       accessories {
-         _id
-       }
+      #  dressJumpsuit {
+      #    _id
+      #  }
+      #  shoes {
+      #    _id
+      #  }
+      #  outerwear {
+      #    _id
+      #  }
+      #  accessories {
+      #    _id
+      #  }
     }
   }
 `;

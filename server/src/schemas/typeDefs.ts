@@ -113,7 +113,7 @@ const typeDefs = gql`
   }
 
   input OutfitInput {
-    userId: ID!
+    # userId: ID!
     topId: ID!
     bottomId: ID!
      dressJumpsuitId: ID
