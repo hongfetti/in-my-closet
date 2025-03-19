@@ -101,7 +101,9 @@ interface UpdateOutfitArgs {
 }
 
 interface DeleteOutfitArgs {
-  id: string;
+  input: {
+    id: string;
+  }
 }
 
 const resolvers = {
@@ -431,7 +433,7 @@ console.log(deletedItem)
 
     deleteOutfit: async (
       _parent: any,
-      { id }: DeleteOutfitArgs,
+      { input }: DeleteOutfitArgs,
       context: any
     ) => {
       // make sure user is valid
@@ -442,7 +444,7 @@ console.log(deletedItem)
       }
 
       // Find the outfit
-      const outfit = await Outfit.findById(id);
+      const outfit = await Outfit.findById(input.id);
       if (!outfit) {
         throw new Error("Outfit not found");
       }
@@ -455,12 +457,12 @@ console.log(deletedItem)
       // remove the outfit from the outfits array in users
       await User.findByIdAndUpdate(
         context.user._id,
-        { $pull: { outfits: id } },
+        { $pull: { outfits: input.id } },
         { new: true }
       );
 
       // delete outfit from database
-      await Outfit.findByIdAndDelete(id);
+      await Outfit.findByIdAndDelete(input.id);
 
       return { message: "Outfit successfully deleted!" };
     },
