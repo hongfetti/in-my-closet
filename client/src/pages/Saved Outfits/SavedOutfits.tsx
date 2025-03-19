@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { GET_ALL_MY_OUTFITS } from "../utils/queries";
+import { GET_ALL_MY_OUTFITS } from "../../utils/queries";
 
 const SavedOutfits = () => {
   const { loading, error, data } = useQuery(GET_ALL_MY_OUTFITS);
