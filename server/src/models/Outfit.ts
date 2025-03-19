@@ -24,7 +24,6 @@ const outfitSchema = new Schema<IOutfit>(
             ref: "ClothingItems",
             required: true,
 
-            // this should ensure that items that are tops are saved as such
             validate: {
                 validator: async function (value: Types.ObjectId) {
                     const item = await ClothingItem.findById(value);
