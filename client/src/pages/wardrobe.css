@@ -1,0 +1,20 @@
+.uniform-button {
+    background-color: #7669ea !important;
+    color: white !important;
+    font-size: 10px !important;
+    padding: 6px 10px !important;
+    display: block !important; 
+    margin: 10px auto !important; 
+    width: fit-content !important; 
+    max-width: 90% !important; 
+    border-radius: 5px !important; 
+    text-align: center !important;
+  }
+  
+  @media (max-width: 576px) {
+    .uniform-button {
+      font-size: 8px !important;
+      padding: 4px 8px !important;
+      max-width: 80% !important;
+    }
+  }
