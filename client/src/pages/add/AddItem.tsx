@@ -41,7 +41,9 @@ const Add = () => {
           input: selectedItems,
         },
       });
+      alert("Item added!");
       console.log("Mutation Success:", data);
+      window.location.reload();
     } catch (error) {
       console.error("Mutation Error So So Sad...:", error);
     }
@@ -277,16 +279,16 @@ const Add = () => {
             />
           )}
         </div>
-<p></p>
+        <p></p>
         <button
-  type="button"
-  className="btn uniform-button"
-  style={{ backgroundColor: "#7669EA", color: "white", width: "200px" }}
-  onClick={handleSubmit}
-  disabled={loading || !!error}
->
-  {loading ? "Adding..." : "Add to Closet"}
-</button>
+          type="button"
+          className="btn uniform-button"
+          style={{ backgroundColor: "#7669EA", color: "white", width: "200px" }}
+          onClick={handleSubmit}
+          disabled={loading || !!error}
+        >
+          {loading ? "Adding..." : "Add to Closet"}
+        </button>
       </form>
     </main>
   );
