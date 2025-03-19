@@ -77,7 +77,7 @@ const NavigationBar = () => {
                   style={{ filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.5))" }}
                 />
                 <span className="fw-bold" style={{ color: "#7669ea" }}>
-                  {`${weather.current_temp_f}°F`}, {weather.location_name},{" "}
+                  {`${Math.round(weather.current_temp_f)}°F`}, {weather.location_name},{" "}
                   {weather.location_region}
                 </span>
               </>
