@@ -76,7 +76,7 @@ A.form {
 }
 
 body {
-  background-image: url('https://previews.dropbox.com/p/thumb/ACkonB954WZr-G9eNvpFsrNHK2OONAkabU0gqg8h_7El_6SK7VOAs7ycDAGG2uEgNGPPkNXkJxCIcNUZ-fDzpcacYF74ZDCEEeuXJ-btjgHQgYUkqUkR2nG2Op6wU0Qjl_VhLWaliiU4SUnSfcdWTqYp-aTkC_-8a1Wvi7FAjcHc8OcPR6K-G27iV-fDAuK4HjXFF8_4zTL8nsPEHH79CAYuzTCAumxt05RjD4Tvq8zrnXT6gMzAu2OJ9X6f7niLD17gH8bQIhEW-BqrkTe4z36guqD8-X54dJFej2XbMnqJv-QmuAyH4WHmQExJKcsw_lxVaFZD9BRQ-lvU5ILOFJbo/p.png'); /* Path to your image */
+  background-image: url(../../assets/IN_MY_CLOSET_WEB.png);
   background-size: cover; 
   background-repeat: no-repeat;
   background-position: center; 
@@ -110,11 +110,13 @@ body {
   .upload {
     width: 80% !important; /* Matches dropdown width */
   }
-
   .uniform-button {
-    width: 80% !important; /* Makes buttons same width as dropdowns */
+    width: 120% !important; /* Increases button width to fit text */
+    max-width: 400px !important; /* Prevents them from being too wide */
     text-align: center;
     display: block;
     margin: 10px auto; /* Centers buttons */
+    font-size: 18px !important; /* Makes text readable */
+    padding: 12px !important; /* Adds more button padding */
   }
 }

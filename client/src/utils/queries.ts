@@ -113,11 +113,11 @@ export const GET_ALL_MY_OUTFITS = gql`
 query MyOutfits {
   myOutfits {
     _id
-    top {
+    topId {
       _id
       image_url
     }
-    bottom {
+    bottomId {
       _id
       image_url
     }
