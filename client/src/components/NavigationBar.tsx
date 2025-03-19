@@ -62,23 +62,29 @@ const NavigationBar = () => {
 
         {/* Weather Section */}
         {auth.loggedIn() ? (
-          <div className="weather-info">
-            {loading && <span>Loading weather...</span>}
+          <div className="weather-info d-flex align-items-center">
+            {loading && (
+              <span className="fw-bold" style={{ color: "#7669ea" }}>
+                Loading weather...
+              </span>
+            )}
             {weather && (
               <>
                 <img
                   src={weather.condition_icon}
                   alt={weather.condition_text}
+                  className="me-2"
+                  style={{ filter: "drop-shadow(0 0 2px rgba(0, 0, 0, 0.5))" }}
                 />
-                <span>
-                  {weather.current_temp_f}, {weather.location_name},{" "}
+                <span className="fw-bold" style={{ color: "#7669ea" }}>
+                  {`${weather.current_temp_f}°F`}, {weather.location_name},{" "}
                   {weather.location_region}
                 </span>
               </>
             )}
           </div>
         ) : (
-          // TODO: I don't actually want this here, but it made me :(
+          // I don't actually want this here, but it made me :(
           <p></p>
         )}
 
@@ -143,8 +149,8 @@ const NavigationBar = () => {
           ) : (
             <ul className="navbar-nav">
               {/* <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/" style={{ color: "#7669ea" }}>Home</Link>
-            </li> */}
+            <Link className="nav-link fw-bold" to="/" style={{ color: "#7669ea" }}>Home</Link>
+          </li> */}
               <li className="nav-item">
                 <Link
                   className="nav-link fw-bold"
