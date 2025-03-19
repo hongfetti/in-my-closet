@@ -1,7 +1,8 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_CURRENT_USER } from "../utils/queries";
 import { ClothingItems } from "../interfaces/ClothingItems";
-import { DELETE_CLOTHING_ITEM } from "../utils/mutations" 
+import { DELETE_CLOTHING_ITEM } from "../utils/mutations";
+import "../pages/wardrobe.css"
 
 const Wardrobe = () => {
   const { loading, error, data, refetch } = useQuery(GET_CURRENT_USER);
@@ -37,15 +38,14 @@ const handleSubmit = async (id:string) => {
                 <p className="card-text">Color: {item.color}</p>
                 <p className="card-text">Size: {item.size}</p>
                 <p className="card-text">Season: {item.season}</p>
-                <button 
-                type="button"
-                className="btn uniform-button"
-          style={{ backgroundColor: "#7669EA", color: "white" }}
-          onClick={() => handleSubmit(item._id)}
-          disabled={loading || !!error}
-        >
-          {loading ? "Deleting..." : "As If! DELETE."}
-                </button>
+                <button
+                    type="button"
+                    className="btn uniform-button"
+                    onClick={() => handleSubmit(item._id)}
+                    disabled={loading || !!error}
+                  >
+                    {loading ? "Deleting..." : "AS IF, DELETE!"}
+                  </button>
               </div>
             </div>
           </div>
@@ -56,4 +56,3 @@ const handleSubmit = async (id:string) => {
 };
 
 export default Wardrobe;
-
