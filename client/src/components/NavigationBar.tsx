@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 import currentWeatherData from "../utils/getWeather";
 import { WeatherResult } from "../utils/getWeather";
-import logo from "../assets/2.png";
 
 // GraphQL imports
 import { GET_CURRENT_USER } from "../utils/queries";
