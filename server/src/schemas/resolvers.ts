@@ -75,26 +75,26 @@ interface DeleteClothingArgs {
 
 interface AddOutfitArgs {
   input: {
-    // userId: string;
+    userId: string;
     topId: string;
     bottomId: string;
-    // dressJumpsuitId?: string;
-    // shoesId?: string;
-    // outerwearId?: string;
-    // accessoriesIds?: string[];
+    dressJumpsuitId?: string;
+    shoesId?: string;
+    outerwearId?: string;
+    accessoriesIds?: string[];
   };
 }
 
 interface UpdateOutfitArgs {
   input: {
     id: string;
-    // userId: string;
+    userId: string;
     topId?: string;
     bottomId?: string;
-    // dressJumpsuitId?: string;
-    // shoesId?: string;
-    // outerwearId?: string;
-    // accessoriesIds?: string[];
+    dressJumpsuitId?: string;
+    shoesId?: string;
+    outerwearId?: string;
+    accessoriesIds?: string[];
   };
 }
 

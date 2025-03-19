@@ -88,7 +88,7 @@ export const ADD_OUTFIT = gql`
       _id
       # user {
       #   _id
-      # }
+      }
       top {
         _id
       }
@@ -108,7 +108,7 @@ export const ADD_OUTFIT = gql`
       #   _id
       # }
     }
-  }
+  # }
 `;
 
 export const UPDATE_OUTFIT = gql`
