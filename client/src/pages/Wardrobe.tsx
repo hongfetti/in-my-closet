@@ -1,84 +1,33 @@
+import { useQuery } from "@apollo/client";
+import { GET_CLOTHING_ITEMS } from "../../utils/queries";
+import { ClothingItems } from "../../interfaces/ClothingItems";
 
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+const Wardrobe = () => {
+  const { loading, error, data } = useQuery(GET_CLOTHING_ITEMS);
 
-interface IOutfit {
-  _id: string;
-  name: string;
-  imageUrl: string;
-}
-
-interface ClothingItem {
-  _id: string;
-  name: string;
-  type: string;
-  imageUrl: string;
-  category: string;
-}
-
-interface Wardrobe {
-  outfits: IOutfit[];
-  clothingItems: ClothingItem[];
-}
-
-const WardrobeProfile: React.FC = () => {
-  const { userId } = useParams<{ userId: string }>(); // Get user ID from URL params
-  const [wardrobe, setWardrobe] = useState<Wardrobe | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchWardrobe = async () => {
-      try {
-        const response = await fetch(`/api/users/${userId}/wardrobe`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch wardrobe data");
-        }
-        const data: Wardrobe = await response.json();
-        setWardrobe(data);
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWardrobe();
-  }, [userId]);
-
-  if (loading) return <p>Loading wardrobe...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold text-gray-900">Wardrobe</h2>
-
-     
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold">Outfits</h3>
-        <div className="grid grid-cols-2 gap-4">
-          {wardrobe?.outfits.map((outfit) => (
-            <div key={outfit._id} className="bg-gray-100 p-4 rounded-lg shadow">
-              <img src={outfit.imageUrl} alt={outfit.name} className="w-full h-40 object-cover rounded-lg"/>
-              <p className="text-center mt-2">{outfit.name}</p>
+    <main className="container mt-5">
+      <h1 className="text-center" style={{ backgroundColor: '#7669EA', color: 'white', padding: '10px', borderRadius: '10px' }}>My Wardrobe</h1>
+      <div className="row mt-4">
+        {data?.getClothingItems?.map((item: ClothingItems, index: number) => (
+          <div key={index} className="col-md-4 mb-4">
+            <div className="card shadow-sm">
+              <img src={item.image_url} className="card-img-top" alt={item.articleType} style={{ height: '300px', objectFit: 'cover' }} />
+              <div className="card-body" style={{ backgroundColor: '#FFBE98' }}>
+                <h5 className="card-title">{item.articleType}</h5>
+                <p className="card-text">Color: {item.color}</p>
+                <p className="card-text">Size: {item.size}</p>
+                <p className="card-text">Season: {item.season}</p>
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold">Clothing Items</h3>
-        <div className="grid grid-cols-2 gap-4">
-          {wardrobe?.clothingItems.map((item) => (
-            <div key={item._id} className="bg-gray-100 p-4 rounded-lg shadow">
-              <img src={item.imageUrl} alt={item.name} className="w-full h-32 object-cover rounded-lg"/>
-              <p className="text-center mt-2">{item.name} ({item.category})</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    </main>
   );
 };
 
-export default WardrobeProfile;
+export default Wardrobe;
