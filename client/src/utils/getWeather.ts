@@ -55,7 +55,7 @@ interface WeatherData {
   current: Current;
 }
 
-interface WeatherResult {
+export interface WeatherResult {
   location_name: string;
   location_region: string;
   current_temp_f: number;
@@ -108,5 +108,6 @@ async function currentWeatherData(location: string) {
     return error;
   }
 }
+
 
 export default currentWeatherData;

@@ -39,7 +39,7 @@ const UploadWidget = ({ setImageUrl }: { setImageUrl: (url: string) => void }) =
 
   return (
     <button type="button" className="btn btn-primary" onClick={() => widgetRef.current?.open()}>
-      Upload Profile Picture
+      Add Item Photo
     </button>
   );
 };

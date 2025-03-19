@@ -341,9 +341,9 @@ const resolvers = {
       }
 
       // make sure creating user is same as updating user
-      if (context.user._id.toString() !== outfit.userId.toString()) {
-        throw new AuthenticationError("You can only modify your own outfits.");
-      }
+      // if (context.user._id.toString() !== outfit.userId.toString()) {
+      //   throw new AuthenticationError("You can only modify your own outfits.");
+      // }
 
       const updatedOutfit = await Outfit.findByIdAndUpdate(
         input.id,
@@ -373,9 +373,9 @@ const resolvers = {
       }
 
       // make sure creating user is same as updating user
-      if (context.user._id.toString() !== outfit.userId.toString()) {
-        throw new AuthenticationError("You can only modify your own outfits.");
-      }
+      // if (context.user._id.toString() !== outfit.userId.toString()) {
+      //   throw new AuthenticationError("You can only modify your own outfits.");
+      // }
 
       // remove the outfit from the outfits array in users
       await User.findByIdAndUpdate(

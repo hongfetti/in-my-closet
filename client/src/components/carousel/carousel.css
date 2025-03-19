@@ -2,6 +2,26 @@
   max-width: 500px;
   max-height: 500px;
 } */
+/* Custom Carousel Button Styling */
+.custom-carousel-btn {
+  background-color: #7669ea !important;
+  border: none !important;
+  color: white !important;
+  font-size: 24px !important;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.custom-carousel-btn:hover {
+  background-color: #5a4cd6 !important; /* Darker shade on hover */
+  color: white !important;
+}
 
 section {
   display: flex;
@@ -63,4 +83,42 @@ section {
 /* Position the Next Button on the Right */
 .control-next {
   right: -200px;
+}
+
+
+
+
+/* MEDIA QUERY - MOBILE */
+@media (max-width: 768px) {
+  /* Reduce carousel height for mobile */
+  .carouselContainer {
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Reduce space between slides */
+  .carousel-inner {
+    padding: 0;
+    margin: 0;
+  }
+
+  .carousel-item {
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Smaller navigation buttons */
+  .custom-carousel-btn {
+    width: 35px;  /* Smaller size for mobile */
+    height: 35px;
+    font-size: 20px; /* Adjust arrow size */
+  }
+
+  .control-prev {
+    left: 5px; /* Bring buttons even closer on mobile */
+  }
+
+  .control-next {
+    right: 5px; /* Bring buttons even closer on mobile */
+  }
 }
