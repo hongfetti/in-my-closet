@@ -72,7 +72,7 @@ async function fetchWeatherData(location: string) {
     const apiKey = import.meta.env.VITE_WEATHER_API_KEY || "";
   const url = `${baseURL}key=${apiKey}&q=${location}`;
 
-  console.log("Made it to fetchWeatherData");
+  console.log("Made it to fetchWeatherData for location: ", location);
 
   try {
     const response = await fetch(url);

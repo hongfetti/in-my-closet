@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GET_CURRENT_USER } from "../../utils/queries";
 import { useState } from "react";
 import SaveOutfitButton from "../../components/SaveOutfitBtn";
+import auth from "../../utils/auth";
 
 const Home = () => {
   const { data } = useQuery(GET_CURRENT_USER);
@@ -48,7 +49,7 @@ const Home = () => {
     setSelectedBottom(id); // Update bottom item state
   };
 
-  return (
+  return auth.loggedIn() ? (
     <main className="text-center" style={{ marginTop: "80px" }}>
       <section className="container">
         <h1
@@ -74,9 +75,11 @@ const Home = () => {
           onUpdateVisibleItem={handleUpdateBottomItem}
         />
       </section>
+
       <section className="btn-section">
         <SaveOutfitButton topId={selectedTop} bottomId={selectedBottom} />
       </section>
+
       <Link className="page-nav" to="/add">
         <button
           className="btn"
@@ -92,6 +95,51 @@ const Home = () => {
           Add Items
         </button>
       </Link>
+    </main>
+  ) : (
+    <main className="text-center" style={{ marginTop: "80px" }}>
+      <section className="container">
+        <h1
+          className="text-primary mb-4"
+          style={{
+            backgroundColor: "#7669EA",
+            color: "white",
+            padding: "10px",
+            borderRadius: "10px",
+          }}
+        >
+          Style It Up
+        </h1>
+
+        <div className="d-flex justify-content-center gap-3">
+          <Link
+            to="/login"
+            className="text-primary fs-4"
+            style={{
+              backgroundColor: "#7669EA",
+              color: "white",
+              padding: "10px",
+              borderRadius: "10px",
+              textDecoration: "none",
+            }}
+          >
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            className="text-primary fs-4"
+            style={{
+              backgroundColor: "#7669EA",
+              color: "white",
+              padding: "10px",
+              borderRadius: "10px",
+              textDecoration: "none",
+            }}
+          >
+            Sign Up
+          </Link>
+        </div>
+      </section>
     </main>
   );
 };
