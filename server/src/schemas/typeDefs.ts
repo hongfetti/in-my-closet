@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { Outfit } from "../models";
 
 const typeDefs = gql`
   type User {
@@ -63,6 +64,7 @@ const typeDefs = gql`
 
   type Outfit {
     _id: ID!
+    user: ID!
     top: ClothingItem
     bottom: ClothingItem
     dressJumpsuit: ClothingItem
@@ -114,20 +116,20 @@ const typeDefs = gql`
     # userId: ID!
     topId: ID!
     bottomId: ID!
-    # dressJumpsuitId: ID
-    # shoesId: ID
-    # outerwearId: ID
-    # accessoriesIds: [ID!]
+     dressJumpsuitId: ID
+     shoesId: ID
+     outerwearId: ID
+     accessoriesIds: [ID!]
   }
 
   input UpdateOutfitInput {
     id: ID!
     topId: ID
     bottomId: ID
-    # dressJumpsuitId: ID
-    # shoesId: ID
-    # outerwearId: ID
-    # accessoriesIds: [ID!]
+     dressJumpsuitId: ID
+     shoesId: ID
+     outerwearId: ID
+     accessoriesIds: [ID!]
   }
 
   input DeleteOutfitInput {
@@ -164,5 +166,5 @@ const typeDefs = gql`
     deleteOutfit(input: DeleteOutfitInput!): Outfit
   }
 `;
-
-export default typeDefs;
+;
+export default typeDefs; 

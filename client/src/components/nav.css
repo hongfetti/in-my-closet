@@ -1,0 +1,17 @@
+@media (max-width: 768px) {
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .navbar-brand {
+      order: -1; /* Ensures logo stays at the top */
+    }
+  
+    .weather-info {
+      order: 1; /* Moves the weather below the logo */
+      margin-top: 10px; /* Adds space between logo and weather */
+    }
+  }
