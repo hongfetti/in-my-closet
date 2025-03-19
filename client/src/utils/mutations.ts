@@ -78,6 +78,12 @@ export const DELETE_CLOTHING_ITEM = gql`
   mutation deleteClothingItem($input: DeleteClothingItemInput!) {
     deleteClothingItem(input: $input) {
       _id
+    image_url
+    articleType
+    color
+    size
+    season
+    createdAt
     }
   }
 `;
