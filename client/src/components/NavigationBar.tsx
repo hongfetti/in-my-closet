@@ -104,7 +104,6 @@ const NavigationBar = () => {
               <li className="nav-item">
                 <Link
                   className="nav-link fw-bold"
-                  // !ADD proper link
                   to="/wardrobe"
                   style={{ color: "#7669ea" }}
                 >
@@ -114,8 +113,7 @@ const NavigationBar = () => {
               <li className="nav-item">
                 <Link
                   className="nav-link fw-bold"
-                  // !ADD proper link
-                  to="/outfits"
+                  to="/saved"
                   style={{ color: "#7669ea" }}
                 >
                   Outfits
@@ -124,22 +122,21 @@ const NavigationBar = () => {
               <li className="nav-item">
                 <Link
                   className="nav-link fw-bold"
-                  // !ADD proper link
-                  to="/add-item"
+                  to="/add"
                   style={{ color: "#7669ea" }}
                 >
                   Add Item
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
+                {/* !Future Change: make it a link again and redirect it to the home page if we make it. */}
+                <a
                   className="nav-link fw-bold"
-                  // !ADD proper link
-                  to="/logout"
+                  onClick={auth.logout}
                   style={{ color: "#7669ea" }}
                 >
                   Logout
-                </Link>
+                </a>
               </li>
             </ul>
           ) : (
