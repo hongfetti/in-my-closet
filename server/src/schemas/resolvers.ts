@@ -27,6 +27,22 @@ interface AddUserArgs {
   };
 }
 
+interface UpdateUserArgs {
+  input: {
+    id: string;
+    username?: string;
+    email?: string;
+    location?: string;
+    password?: string;
+  }
+}
+
+interface DeleteUserArgs {
+  input: {
+    id: string;
+  }
+}
+
 interface LoginUserArgs {
   email: string;
   password: string;
@@ -59,26 +75,26 @@ interface DeleteClothingArgs {
 
 interface AddOutfitArgs {
   input: {
-    userId: string;
+    // userId: string;
     topId: string;
     bottomId: string;
-    dressJumpsuitId?: string;
-    shoesId?: string;
-    outerwearId?: string;
-    accessoriesIds?: string[];
+    // dressJumpsuitId?: string;
+    // shoesId?: string;
+    // outerwearId?: string;
+    // accessoriesIds?: string[];
   };
 }
 
 interface UpdateOutfitArgs {
   input: {
     id: string;
-    userId: string;
+    // userId: string;
     topId?: string;
     bottomId?: string;
-    dressJumpsuitId?: string;
-    shoesId?: string;
-    outerwearId?: string;
-    accessoriesIds?: string[];
+    // dressJumpsuitId?: string;
+    // shoesId?: string;
+    // outerwearId?: string;
+    // accessoriesIds?: string[];
   };
 }
 
@@ -174,6 +190,54 @@ const resolvers = {
 
       // Return the token and the user
       return { token, user };
+    },
+
+    updateUser: async (_parent: any, { input }: UpdateUserArgs, context: any) => {
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to update your profile.");
+      }
+    
+      if (context.user._id.toString() !== input.id) {
+        throw new AuthenticationError("You can only update your own profile.");
+      }
+    
+      const user = await User.findById(input.id);
+      if (!user) {
+        throw new Error("User not found.");
+      }
+    
+      // Only update the password if it's provided, triggering the pre-save hook
+      if (input.password) {
+        user.password = input.password;  // The pre-save hook will hash it automatically
+      }
+    
+      // Update other fields
+      Object.assign(user, input);
+      
+      // Save the updated user
+      await user.save();
+    
+      return user;
+    },
+
+    deleteUser: async (_parent: any, { input }: DeleteUserArgs, context: any) => {
+      if (!context.user || context.user._id.toString() !== input.id) {
+        throw new AuthenticationError("You can only delete your own account.");
+      }
+    
+      const user = await User.findById(input.id);
+      if (!user) {
+        throw new Error("User not found.");
+      }
+    
+      // Delete associated clothing items and outfits
+      await ClothingItem.deleteMany({ _id: { $in: user.clothingItems } });
+      await Outfit.deleteMany({ _id: { $in: user.outfits } });
+    
+      // Delete the user
+      await User.findByIdAndDelete(input.id);
+    
+      return { message: "User successfully deleted." };
     },
 
     login: async (_parent: any, { email, password }: LoginUserArgs) => {
@@ -319,7 +383,7 @@ const resolvers = {
         { new: true }
       );
 
-      return outfit;
+      return outfit.populate([{ path: "topId" }, { path: "bottomId" }]);
     },
 
     updateOutfit: async (
@@ -341,9 +405,9 @@ const resolvers = {
       }
 
       // make sure creating user is same as updating user
-      if (context.user._id.toString() !== outfit.userId.toString()) {
-        throw new AuthenticationError("You can only modify your own outfits.");
-      }
+      // if (context.user._id.toString() !== outfit.userId.toString()) {
+      //   throw new AuthenticationError("You can only modify your own outfits.");
+      // }
 
       const updatedOutfit = await Outfit.findByIdAndUpdate(
         input.id,
@@ -373,9 +437,9 @@ const resolvers = {
       }
 
       // make sure creating user is same as updating user
-      if (context.user._id.toString() !== outfit.userId.toString()) {
-        throw new AuthenticationError("You can only modify your own outfits.");
-      }
+      // if (context.user._id.toString() !== outfit.userId.toString()) {
+      //   throw new AuthenticationError("You can only modify your own outfits.");
+      // }
 
       // remove the outfit from the outfits array in users
       await User.findByIdAndUpdate(
