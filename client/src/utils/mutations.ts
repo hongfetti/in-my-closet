@@ -124,10 +124,10 @@ export const UPDATE_OUTFIT = gql`
       user {
         _id
       }
-      top {
+      topId {
         _id
       }
-      bottom {
+      bottomId {
         _id
       }
       dressJumpsuit {

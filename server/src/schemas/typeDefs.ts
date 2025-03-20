@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { Outfit } from "../models";
+// import { Outfit } from "../models";
 
 const typeDefs = gql`
   type User {
