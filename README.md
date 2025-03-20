@@ -47,7 +47,13 @@ If you would like to contribute to this application, please consult the guidelin
 
 ## Tests
 
+![Alt text](./client/src/assets/login-signup.PNG)
 
+![Alt text](./client/src/assets/home.PNG)
+
+![Alt text](./client/src/assets/saved-outfits.PNG)
+
+![Alt text](./client/src/assets/add-item.PNG)
 
 ## Questions
 
