@@ -1,8 +1,14 @@
 import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { GET_ALL_MY_OUTFITS } from "../../utils/queries";
+import { DELETE_OUTFIT } from "../../utils/mutations";
 //import  { Outfit }   from "../../../../server/src/schemas/typeDefs.js"
 const Saved = () => {
   const { loading, error, data } = useQuery(GET_ALL_MY_OUTFITS);
+
+  const [deleteOutfit] = useMutation(DELETE_OUTFIT,{refetchQueries: [ {query: GET_ALL_MY_OUTFITS}]
+
+});
 
   if (loading) return <p>Loading Saved Outfits...</p>;
   if (error) return <p>Error: {error.message}</p>
@@ -26,6 +32,15 @@ console.log("im right Here" , data)
                   <img src={outfit.bottomId?.image_url || ''} alt="Bottom" />
                 </div>
               </div>
+              <button
+              className="delete-button"
+              onClick={() => {
+                console.log("Deleting outfit with ID:", outfit._id);
+                deleteOutfit({ variables: { input: { id: outfit._id } } });
+              }}
+            >
+              Delete
+            </button>
             </div>
           ))}
         </div>
