@@ -37,7 +37,6 @@ const Saved = () => {
                   className="card-body"
                   style={{ backgroundColor: "#FFBE98" }}
                 >
-                  <h5 className="card-title">Outfit ID: {outfit._id}</h5>
                   <div className="outfit-image d-flex justify-content-around">
                     <div className="top">
                       <img
