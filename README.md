@@ -64,3 +64,7 @@ Jazz: https://github.com/codeherstyle
 Olivia: https://github.com/Liv-5
 
 Email: ryan.hong1994@gmail.com
+Chad: wick9872000@gmail.com
+Daniel: dllorens28@gmail.com
+Jazz: jazminguillen1093@gmail.com
+Olivia: osmith5@kent.edu
