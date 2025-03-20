@@ -11,54 +11,47 @@ const Saved = () => {
   if (loading) return <p>Loading Saved Outfits...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  console.log("Fetched outfits:", data); // Debugging
-
-  const handleDelete = async (id: string) => {
-    try {
-      await deleteOutfit({
-        variables: { id }, // Ensure mutation structure matches GraphQL schema
-      });
-    } catch (error) {
-      console.error("Error deleting outfit:", error);
-    }
-  };
+  console.log("im right Here", data);
 
   return (
     <main className="container mt-5">
       <h1
-        className="text-center text-white p-3 rounded"
-        style={{ backgroundColor: "#7669EA" }}
+        className="text-center"
+        style={{
+          backgroundColor: "#7669EA",
+          color: "white",
+          padding: "10px",
+          borderRadius: "10px",
+        }}
       >
         Your Saved Outfits
       </h1>
-      <div className="row mt-4">
-        {data?.myOutfits?.length === 0 ? (
-          <p className="text-center">You don't have any saved outfits yet.</p>
-        ) : (
-          data?.myOutfits?.map((outfit: any) => (
+      {data.myOutfits.length === 0 ? (
+        <p className="text-center">You don't have any saved outfits yet.</p>
+      ) : (
+        <div className="row mt-4">
+          {data.myOutfits.map((outfit: any) => (
             <div key={outfit._id} className="col-md-4 mb-4">
               <div className="card shadow-sm">
                 <div
                   className="card-body"
                   style={{ backgroundColor: "#FFBE98" }}
                 >
-                  <h5 className="card-title text-center">
-                    Outfit ID: {outfit._id}
-                  </h5>
-                  <div className="d-flex justify-content-center">
-                    <div className="me-2">
+                  <h5 className="card-title">Outfit ID: {outfit._id}</h5>
+                  <div className="outfit-image d-flex justify-content-around">
+                    <div className="top">
                       <img
                         src={outfit.topId?.image_url || ""}
                         alt="Top"
-                        className="img-fluid rounded"
+                        className="img-fluid"
                         style={{ height: "150px", objectFit: "cover" }}
                       />
                     </div>
-                    <div>
+                    <div className="bottom">
                       <img
                         src={outfit.bottomId?.image_url || ""}
                         alt="Bottom"
-                        className="img-fluid rounded"
+                        className="img-fluid"
                         style={{ height: "150px", objectFit: "cover" }}
                       />
                     </div>
@@ -66,17 +59,21 @@ const Saved = () => {
                   <button
                     className="btn uniform-button w-100 mt-3"
                     style={{ backgroundColor: "#7669EA", color: "white" }}
-                    onClick={() => handleDelete(outfit._id)}
-                    disabled={loading}
+                    onClick={() => {
+                      console.log("Deleting outfit with ID:", outfit._id);
+                      deleteOutfit({
+                        variables: { input: { id: outfit._id } },
+                      });
+                    }}
                   >
-                    {loading ? "Deleting..." : "Delete Outfit"}
+                    Delete Outfit
                   </button>
                 </div>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </main>
   );
 };
