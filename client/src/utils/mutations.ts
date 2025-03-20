@@ -30,12 +30,12 @@ export const ADD_USER = gql`
 export const UPDATE_USER = gql`
   mutation updateUser($input: UpdateUserInput!) {
     updateUser(input: $input) {
-    _id
-    username
-    email
-    location
+      _id
+      username
+      email
+      location
+    }
   }
-}
 `;
 
 export const DELETE_USER = gql`
@@ -50,7 +50,7 @@ export const DELETE_USER = gql`
 
 export const ADD_CLOTHING_ITEM = gql`
   mutation addClothingItem($input: ClothingItemInput!) {
-    addClothingItem(input: $input) {   
+    addClothingItem(input: $input) {
       _id
       image_url
       articleType
@@ -78,12 +78,12 @@ export const DELETE_CLOTHING_ITEM = gql`
   mutation deleteClothingItem($input: DeleteClothingItemInput!) {
     deleteClothingItem(input: $input) {
       _id
-    image_url
-    articleType
-    color
-    size
-    season
-    createdAt
+      image_url
+      articleType
+      color
+      size
+      season
+      createdAt
     }
   }
 `;
@@ -148,7 +148,7 @@ export const UPDATE_OUTFIT = gql`
 
 export const DELETE_OUTFIT = gql`
   mutation deleteOutfit($input: DeleteOutfitInput!) {
-    deleteOutfit(input: $input) { 
+    deleteOutfit(input: $input) {
       _id
     }
   }

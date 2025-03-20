@@ -67,10 +67,10 @@ const typeDefs = gql`
     user: ID!
     topId: ClothingItem
     bottomId: ClothingItem
-     dressJumpsuit: ClothingItem
-     shoes: ClothingItem
-     outerwear: ClothingItem
-     accessories: [ClothingItem]
+    dressJumpsuit: ClothingItem
+    shoes: ClothingItem
+    outerwear: ClothingItem
+    accessories: [ClothingItem]
   }
 
   input UserInput {
@@ -116,26 +116,26 @@ const typeDefs = gql`
     # userId: ID!
     topId: ID!
     bottomId: ID!
-     dressJumpsuitId: ID
-     shoesId: ID
-     outerwearId: ID
-     accessoriesIds: [ID!]
+    dressJumpsuitId: ID
+    shoesId: ID
+    outerwearId: ID
+    accessoriesIds: [ID!]
   }
 
   input UpdateOutfitInput {
     id: ID!
     topId: ID
     bottomId: ID
-     dressJumpsuitId: ID
-     shoesId: ID
-     outerwearId: ID
-     accessoriesIds: [ID!]
+    dressJumpsuitId: ID
+    shoesId: ID
+    outerwearId: ID
+    accessoriesIds: [ID!]
   }
 
   input DeleteOutfitInput {
-    id: ID!
+    id: ID
   }
-  
+
   type Auth {
     token: ID!
     user: User
@@ -166,5 +166,4 @@ const typeDefs = gql`
     deleteOutfit(input: DeleteOutfitInput!): Outfit
   }
 `;
-;
-export default typeDefs; 
+export default typeDefs;
