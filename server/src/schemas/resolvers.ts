@@ -102,7 +102,7 @@ interface UpdateOutfitArgs {
 
 interface DeleteOutfitArgs {
   input: {
-    id: string;
+  id: string;
   }
 }
 
@@ -297,7 +297,7 @@ const resolvers = {
         season: input.season,
         image_url: input.image_url,
       });
-      // console.log(clothingItem);
+      console.log(clothingItem);
       // push the clothing item onto the clothingItems array on User
       await User.findByIdAndUpdate(
         context.user._id,
@@ -464,7 +464,7 @@ console.log(deletedItem)
       // delete outfit from database
       await Outfit.findByIdAndDelete(input.id);
 
-      return { message: "Outfit successfully deleted!" };
+      return outfit;
     },
   },
 };

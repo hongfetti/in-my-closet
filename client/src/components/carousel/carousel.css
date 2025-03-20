@@ -49,6 +49,7 @@ section {
 .carousel-item img {
   width: 100%; /* Make sure the images are responsive */
   height: 100%; /* Maintain aspect ratio */
+  object-position: center;
 }
 
 .control-prev,
@@ -85,9 +86,6 @@ section {
   right: -200px;
 }
 
-
-
-
 /* MEDIA QUERY - MOBILE */
 @media (max-width: 768px) {
   /* Reduce carousel height for mobile */
@@ -109,7 +107,7 @@ section {
 
   /* Smaller navigation buttons */
   .custom-carousel-btn {
-    width: 35px;  /* Smaller size for mobile */
+    width: 35px; /* Smaller size for mobile */
     height: 35px;
     font-size: 20px; /* Adjust arrow size */
   }
